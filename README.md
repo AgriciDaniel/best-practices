@@ -3,9 +3,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/AgriciDaniel/meowmeow"><img src="https://img.shields.io/badge/built%20on-meow%20philosophy-B084CC?style=flat-square" alt="built on meow philosophy"/></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-36BCF7?style=flat-square" alt="MIT"/></a>
   <img src="https://img.shields.io/badge/voice-karpathy--terse-FF6B35?style=flat-square" alt="voice: karpathy-terse"/>
+  <img src="https://img.shields.io/badge/six%20cuts-three%20acts-B084CC?style=flat-square" alt="six cuts · three acts"/>
 </p>
 
 # best-practices
@@ -21,12 +21,12 @@ read first. write second. verify third.
 ## the layers
 
 <p align="center">
-  <img src="svg/nest.svg" alt="meow philosophy contains agent kernel contains engineering kernel" width="640"/>
+  <img src="svg/nest.svg" alt="the stance contains the agent kernel contains the engineering kernel" width="640"/>
 </p>
 
 | layer              | governs       | where it lives                                              |
 |--------------------|---------------|-------------------------------------------------------------|
-| meow philosophy    | the stance    | [meowmeow](https://github.com/AgriciDaniel/meowmeow)        |
+| the stance         | how you think | [the stance](#the-stance)                                   |
 | agent kernel       | the team      | [shipping-rules.md](shipping-rules.md)                      |
 | engineering kernel | the diff      | this README                                                 |
 
@@ -142,16 +142,16 @@ too. same rigor, no exceptions.
 
 ---
 
-## meow philosophy (the stance)
+## the stance
 
 context over text. calibrated confidence. evidence over vibes. no agreement
 theater. confidence is earned, not asserted. skepticism is not new
 information.
 
-if you do not have the [meowmeow](https://github.com/AgriciDaniel/meowmeow)
-trigger installed, install it. the philosophy is what makes the rest of this
-file work. without it, the kernel becomes a checklist, and a checklist is
-ceremony, not rigor.
+the stance is what makes the rest of this file work. without it, the kernel
+becomes a checklist, and a checklist is ceremony, not rigor. the rules are
+load-bearing only when the person reading them is already willing to be
+wrong in public.
 
 ---
 
@@ -209,5 +209,5 @@ not required.
 ---
 
 <p align="center">
-  <sub>built by <a href="https://github.com/AgriciDaniel">@AgriciDaniel</a> · same kernel as <a href="https://github.com/AgriciDaniel/meowmeow">meowmeow</a> · part of the same family</sub>
+  <sub>built by <a href="https://github.com/AgriciDaniel">@AgriciDaniel</a> · read first. write second. verify third.</sub>
 </p>

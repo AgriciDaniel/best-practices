@@ -6,9 +6,8 @@ one governs the diff. one governs the team. they nest. orchestration calls
 into per-change for every slice. use them together or in isolation; the kernel
 holds either way.
 
-inspired by the [meowmeow](https://github.com/AgriciDaniel/meowmeow)
-philosophy: context over text, calibrated confidence, evidence over vibes,
-no agreement theater.
+the stance underneath both: context over text, calibrated confidence,
+evidence over vibes, no agreement theater.
 
 ---
 
