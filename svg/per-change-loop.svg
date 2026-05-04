@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 380" role="img" aria-label="per-change loop diagram: before, during, after, review, ship, undo">
+  <title>per-change loop: before, during, after, review · ship or undo</title>
+  <rect width="1024" height="380" fill="#0d1117"/>
+
+  <text x="32" y="42" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#7d8590">read first. write second. verify third.</text>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" stroke="#36BCF7" stroke-width="1.5" fill="none">
+    <rect x="32"  y="72" width="220" height="180" rx="10"/>
+    <rect x="284" y="72" width="220" height="180" rx="10"/>
+    <rect x="536" y="72" width="220" height="180" rx="10"/>
+    <rect x="788" y="72" width="220" height="180" rx="10"/>
+  </g>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#c9d1d9">
+    <text x="48"  y="100" font-size="14" font-weight="700" fill="#36BCF7">before</text>
+    <text x="48"  y="128">intent</text>
+    <text x="48"  y="148">context</text>
+    <text x="48"  y="168">blast radius</text>
+    <text x="48"  y="188">guardrails</text>
+
+    <text x="300" y="100" font-size="14" font-weight="700" fill="#36BCF7">during</text>
+    <text x="300" y="128">stay on intent</text>
+    <text x="300" y="148">stay small</text>
+    <text x="300" y="168">scrutiny on</text>
+    <text x="300" y="184">  security code</text>
+
+    <text x="552" y="100" font-size="14" font-weight="700" fill="#36BCF7">after</text>
+    <text x="552" y="128">prove it</text>
+    <text x="552" y="148">root cause</text>
+    <text x="552" y="168">  before fix</text>
+    <text x="552" y="188">plan the undo</text>
+
+    <text x="804" y="100" font-size="14" font-weight="700" fill="#B084CC">review</text>
+    <text x="804" y="128">plan before diff</text>
+    <text x="804" y="148">verify every</text>
+    <text x="804" y="164">  claim</text>
+    <text x="804" y="184">re-audit after</text>
+    <text x="804" y="200">  every revision</text>
+  </g>
+
+  <g stroke="#FF6B35" stroke-width="2" fill="#FF6B35">
+    <line x1="252" y1="162" x2="284" y2="162" marker-end="url(#arrow)"/>
+    <line x1="504" y1="162" x2="536" y2="162" marker-end="url(#arrow)"/>
+    <line x1="756" y1="162" x2="788" y2="162" marker-end="url(#arrow)"/>
+  </g>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#FF6B35"/>
+    </marker>
+    <marker id="arrowback" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#B084CC"/>
+    </marker>
+  </defs>
+
+  <path d="M 898 252 Q 898 312 142 312 Q 142 286 142 286" fill="none" stroke="#B084CC" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrowback)"/>
+  <text x="512" y="304" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#B084CC" text-anchor="middle">undo plan: revert · flag flip · rollback migration</text>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#FFD700">
+    <circle cx="48" cy="350" r="3" fill="#FFD700"/>
+    <text x="60" y="354">ship only when all four hold. guessing on any one means stop and investigate.</text>
+  </g>
+</svg>

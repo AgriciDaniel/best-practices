@@ -1,20 +1,50 @@
+<p align="center">
+  <img src="svg/shipping-rules-banner.svg" alt="shipping rules: the agent kernel" width="100%"/>
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-36BCF7?style=flat-square" alt="MIT"/></a>
+  <img src="https://img.shields.io/badge/two%20prompts-one%20kernel-FF6B35?style=flat-square" alt="two prompts · one kernel"/>
+  <img src="https://img.shields.io/badge/per--change%20%2B%20orchestration-B084CC?style=flat-square" alt="per-change + orchestration"/>
+</p>
+
 # shipping rules
 
-two prompts for shipping changes with AI agents without losing rigor.
+the agent kernel. two prompts that compose with the [engineering kernel](README.md#engineering-kernel)
+underneath to ship changes with help (yourself, a teammate, an agent, a swarm
+of agents) without losing rigor.
+
+read first. write second. verify third.
+
+---
+
+## why two
 
 one governs the diff. one governs the team. they nest. orchestration calls
 into per-change for every slice. use them together or in isolation; the kernel
 holds either way.
 
-the stance underneath both: context over text, calibrated confidence,
-evidence over vibes, no agreement theater.
+| layer              | governs               | applies when                          |
+|--------------------|-----------------------|---------------------------------------|
+| per-change rules   | a single diff         | always, every diff                    |
+| orchestration      | many diffs in flight  | chair-led, multi-agent, parallel work |
+
+the [stance](README.md#the-stance) sits underneath both: context over text,
+calibrated confidence, evidence over vibes, no agreement theater.
+accountability is non-transferable. you read because you sign.
 
 ---
 
 ## 1. per-change rules
 
-the kernel. applies to every diff regardless of who wrote it: you, a
-teammate, or an agent.
+<p align="center">
+  <img src="svg/per-change-loop.svg" alt="per-change loop: before, during, after, review, with undo plan returning" width="100%"/>
+</p>
+
+the kernel for shipping a single diff. applies regardless of who wrote it:
+you, a teammate, or an agent. nests under the engineering kernel cuts on
+[reading](README.md#engineering-kernel), [evidence](README.md#engineering-kernel),
+and [failure](README.md#engineering-kernel) in the README.
 
 ```
 # rules for shipping a change
@@ -50,6 +80,8 @@ read first. write second. verify third.
 - **prove it.** run the tests. run them again after every fix. fixes
   introduce bugs. cover what the request implies: nulls, empties,
   boundaries, auth-denied paths, failure modes.
+- **find the root cause before the fix.** symptom fixes are debt. if
+  three fixes in a row miss, question the architecture, not the symptom.
 - **plan the undo.** revert, flag flip, rollback migration: what is it?
   no answer means not ready. gate risky changes behind a flag so
   rollback is a toggle, not a redeploy.
@@ -86,8 +118,13 @@ confidence is earned, not asserted.
 
 ## 2. orchestration rules
 
-the team layer. for chair-led, multi-agent work where slices run in
-parallel.
+<p align="center">
+  <img src="svg/orchestration.svg" alt="orchestration topology: chair leads, three slices in parallel, explorer-worker-verifier roles, integrated closeout" width="100%"/>
+</p>
+
+the team layer. for chair-led, multi-agent work where slices run in parallel.
+nests over the per-change rules: every slice runs the loop above inside its
+boundary.
 
 ```
 # rules for chair-led multi-agent work
@@ -112,9 +149,13 @@ exempt rigor.
 - **workers implement.** bounded scope, single slice, explicit owner.
   workers don't expand scope to "improve" adjacent code.
 - **verifier gates acceptance.** nothing merges until it passes the
-  criteria written before execution.
+  criteria written before execution. fresh context where possible: the
+  reviewer who never wrote the code spots more than the writer who just
+  finished it.
 - **keep notes current.** brain/vault state is the handoff. stale notes
   cause assumption drift faster than stale code.
+- **context is a budget.** clear when poisoned by failed approaches.
+  dispatch fresh-context reviewers, not the same head twice.
 
 ## constraints
 
@@ -137,15 +178,15 @@ a slice is done when all five exist. otherwise it's still open.
 
 ---
 
-## how to use them together
+## composing them
 
-- **solo work or single-agent loop:** per-change rules only. drop them in
-  your `AGENTS.md`, `CLAUDE.md`, system prompt, or project instructions.
-- **multi-agent / chair-led work:** orchestration rules at the top,
-  per-change rules below or referenced. the chair runs orchestration.
-  every worker runs per-change inside its slice. the verifier runs both:
-  orchestration at the seams (scope, ownership, integration), per-change
-  at the diff.
+| mode                        | what to load                                                                                       |
+|-----------------------------|----------------------------------------------------------------------------------------------------|
+| solo / single-agent loop    | per-change rules only. drop them in your `AGENTS.md`, `CLAUDE.md`, or system prompt.               |
+| multi-agent / chair-led     | orchestration at the top, per-change inside every slice. chair runs orchestration, workers run per-change, verifier runs both. |
+
+verifier's seam: orchestration at the boundaries (scope, ownership,
+integration), per-change at the diff inside each slice.
 
 the layering matters. orchestration governs the team. per-change governs
 the diff. flatten them and you lose the hierarchy that makes either one
@@ -155,4 +196,11 @@ useful.
 
 ## license
 
-do whatever. attribution appreciated, not required.
+MIT. fork it, rewrite it, ship it under your name. attribution appreciated,
+not required.
+
+---
+
+<p align="center">
+  <sub>part of <a href="README.md">best-practices</a> · built by <a href="https://github.com/AgriciDaniel">@AgriciDaniel</a> · read first. write second. verify third.</sub>
+</p>

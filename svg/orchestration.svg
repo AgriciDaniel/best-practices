@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 480" role="img" aria-label="orchestration topology: chair, slices, roles, closeout">
+  <title>orchestration topology · chair · bounded slices · explorers, workers, verifiers · closeout</title>
+  <rect width="1024" height="480" fill="#0d1117"/>
+
+  <defs>
+    <marker id="oarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#FF6B35"/>
+    </marker>
+  </defs>
+
+  <text x="32" y="34" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#7d8590">one chair. parallel where it is safe. clean handoffs. integrated closeout.</text>
+
+  <rect x="412" y="56" width="200" height="64" rx="10" stroke="#FFD700" stroke-width="2" fill="none"/>
+  <text x="512" y="86" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="700" fill="#FFD700" text-anchor="middle">chair</text>
+  <text x="512" y="104" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#a39055" text-anchor="middle">one human owns the call</text>
+
+  <line x1="512" y1="120" x2="512" y2="148" stroke="#FF6B35" stroke-width="2" marker-end="url(#oarrow)"/>
+
+  <g stroke="#36BCF7" stroke-width="1.5" fill="none">
+    <rect x="80"  y="156" width="240" height="76" rx="10"/>
+    <rect x="392" y="156" width="240" height="76" rx="10"/>
+    <rect x="704" y="156" width="240" height="76" rx="10"/>
+  </g>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#c9d1d9">
+    <text x="200" y="184" font-size="13" font-weight="700" fill="#36BCF7" text-anchor="middle">slice 1</text>
+    <text x="200" y="208" font-size="10" fill="#7aa9c2" text-anchor="middle">bounded write scope</text>
+    <text x="200" y="222" font-size="10" fill="#7aa9c2" text-anchor="middle">acceptance criteria written</text>
+
+    <text x="512" y="184" font-size="13" font-weight="700" fill="#36BCF7" text-anchor="middle">slice 2</text>
+    <text x="512" y="208" font-size="10" fill="#7aa9c2" text-anchor="middle">bounded write scope</text>
+    <text x="512" y="222" font-size="10" fill="#7aa9c2" text-anchor="middle">acceptance criteria written</text>
+
+    <text x="824" y="184" font-size="13" font-weight="700" fill="#36BCF7" text-anchor="middle">slice 3</text>
+    <text x="824" y="208" font-size="10" fill="#7aa9c2" text-anchor="middle">bounded write scope</text>
+    <text x="824" y="222" font-size="10" fill="#7aa9c2" text-anchor="middle">acceptance criteria written</text>
+  </g>
+
+  <line x1="200" y1="232" x2="200" y2="266" stroke="#FF6B35" stroke-width="2" marker-end="url(#oarrow)"/>
+  <line x1="512" y1="232" x2="512" y2="266" stroke="#FF6B35" stroke-width="2" marker-end="url(#oarrow)"/>
+  <line x1="824" y1="232" x2="824" y2="266" stroke="#FF6B35" stroke-width="2" marker-end="url(#oarrow)"/>
+
+  <g stroke="#B084CC" stroke-width="1.5" fill="none">
+    <rect x="80"  y="270" width="240" height="80" rx="10"/>
+    <rect x="392" y="270" width="240" height="80" rx="10"/>
+    <rect x="704" y="270" width="240" height="80" rx="10"/>
+  </g>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#c9d1d9">
+    <text x="200" y="296" font-size="13" font-weight="700" fill="#B084CC" text-anchor="middle">explorer</text>
+    <text x="200" y="318" font-size="10" fill="#8d77a3" text-anchor="middle">read-only · maps</text>
+    <text x="200" y="332" font-size="10" fill="#8d77a3" text-anchor="middle">surfaces unknowns</text>
+
+    <text x="512" y="296" font-size="13" font-weight="700" fill="#B084CC" text-anchor="middle">worker</text>
+    <text x="512" y="318" font-size="10" fill="#8d77a3" text-anchor="middle">single slice · writes</text>
+    <text x="512" y="332" font-size="10" fill="#8d77a3" text-anchor="middle">no scope creep</text>
+
+    <text x="824" y="296" font-size="13" font-weight="700" fill="#B084CC" text-anchor="middle">verifier</text>
+    <text x="824" y="318" font-size="10" fill="#8d77a3" text-anchor="middle">fresh context</text>
+    <text x="824" y="332" font-size="10" fill="#8d77a3" text-anchor="middle">gates acceptance</text>
+  </g>
+
+  <line x1="200" y1="350" x2="200" y2="378" stroke="#FF6B35" stroke-width="2"/>
+  <line x1="512" y1="350" x2="512" y2="378" stroke="#FF6B35" stroke-width="2"/>
+  <line x1="824" y1="350" x2="824" y2="378" stroke="#FF6B35" stroke-width="2"/>
+  <line x1="200" y1="378" x2="824" y2="378" stroke="#FF6B35" stroke-width="2"/>
+  <line x1="512" y1="378" x2="512" y2="406" stroke="#FF6B35" stroke-width="2" marker-end="url(#oarrow)"/>
+
+  <rect x="312" y="414" width="400" height="48" rx="10" stroke="#FFD700" stroke-width="2" fill="none"/>
+  <text x="512" y="434" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="700" fill="#FFD700" text-anchor="middle">closeout</text>
+  <text x="512" y="452" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#a39055" text-anchor="middle">result · verification · commit ids · notes · next slice</text>
+</svg>
