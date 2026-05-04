@@ -3,10 +3,11 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-36BCF7?style=flat-square" alt="MIT"/></a>
-  <img src="https://img.shields.io/badge/voice-aphoristic-FF6B35?style=flat-square" alt="voice: aphoristic"/>
-  <img src="https://img.shields.io/badge/six%20cuts-three%20acts-B084CC?style=flat-square" alt="six cuts · three acts"/>
-  <a href="scripts/lint.sh"><img src="https://img.shields.io/badge/lint-scripted-FFD700?style=flat-square" alt="lint: scripted"/></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-36BCF7?style=for-the-badge&logo=opensourceinitiative&logoColor=white"></a>
+  <a href="https://github.com/AgriciDaniel/best-practices/actions/workflows/lint.yml"><img alt="lint" src="https://img.shields.io/github/actions/workflow/status/AgriciDaniel/best-practices/lint.yml?style=for-the-badge&label=lint&logo=githubactions&logoColor=white&color=FFD700"></a>
+  <a href="SKILL.md"><img alt="Claude Code skill" src="https://img.shields.io/badge/claude_code-skill_%2B_slash-FF6B35?style=for-the-badge&logo=anthropic&logoColor=white"></a>
+  <a href="https://github.com/obra/superpowers"><img alt="composes with superpowers" src="https://img.shields.io/badge/composes_with-superpowers-B084CC?style=for-the-badge&logo=github&logoColor=white"></a>
+  <img alt="six cuts · three acts" src="https://img.shields.io/badge/six_cuts-three_acts-0d1117?style=for-the-badge&labelColor=36BCF7">
 </p>
 
 # best-practices

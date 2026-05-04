@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 320" role="img" aria-label="best-practices banner">
   <title>best-practices · read first. write second. verify third.</title>
+
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0d1117"/>
@@ -10,14 +11,100 @@
       <stop offset="55%" stop-color="#B084CC"/>
       <stop offset="100%" stop-color="#FF6B35"/>
     </linearGradient>
+    <radialGradient id="moon" cx="0.4" cy="0.4" r="0.7">
+      <stop offset="0%" stop-color="#1d2533"/>
+      <stop offset="55%" stop-color="#161c27"/>
+      <stop offset="100%" stop-color="#0d1117" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ufoglow" cx="0.5" cy="1" r="0.6">
+      <stop offset="0%" stop-color="#36BCF7" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#36BCF7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="warpTrail" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"  stop-color="#B084CC" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#B084CC" stop-opacity="0.7"/>
+    </linearGradient>
+    <linearGradient id="warpTrail2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"  stop-color="#36BCF7" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#36BCF7" stop-opacity="0.55"/>
+    </linearGradient>
   </defs>
 
   <rect width="1280" height="320" fill="url(#bg)"/>
 
-  <!-- subtle dot grid -->
-  <g fill="#1a2030" opacity="0.7">
-    <circle cx="40"   cy="40"  r="1"/><circle cx="120"  cy="40"  r="1"/><circle cx="200"  cy="40"  r="1"/><circle cx="280"  cy="40"  r="1"/><circle cx="360"  cy="40"  r="1"/><circle cx="440"  cy="40"  r="1"/><circle cx="520"  cy="40"  r="1"/><circle cx="600"  cy="40"  r="1"/><circle cx="680"  cy="40"  r="1"/><circle cx="760"  cy="40"  r="1"/><circle cx="840"  cy="40"  r="1"/><circle cx="920"  cy="40"  r="1"/><circle cx="1000" cy="40"  r="1"/><circle cx="1080" cy="40"  r="1"/><circle cx="1160" cy="40"  r="1"/><circle cx="1240" cy="40"  r="1"/>
+  <!-- distant moon, deep background -->
+  <g opacity="0.9">
+    <circle cx="1175" cy="68" r="44" fill="url(#moon)"/>
+    <circle cx="1162" cy="58" r="2.2" fill="#0d1117" opacity="0.7"/>
+    <circle cx="1183" cy="76" r="1.6" fill="#0d1117" opacity="0.6"/>
+    <circle cx="1170" cy="86" r="1.1" fill="#0d1117" opacity="0.6"/>
+  </g>
+
+  <!-- subtle constellation lines (the dot grid gets a few connections) -->
+  <g stroke="#1a2030" stroke-width="0.5" opacity="0.7">
+    <line x1="120" y1="40"  x2="200" y2="40"/>
+    <line x1="200" y1="40"  x2="280" y2="40"/>
+    <line x1="600" y1="40"  x2="680" y2="40"/>
+    <line x1="40"  y1="280" x2="120" y2="280"/>
+    <line x1="760" y1="280" x2="840" y2="280"/>
+    <line x1="1000" y1="280" x2="1080" y2="280"/>
+  </g>
+
+  <!-- dot grid -->
+  <g fill="#1a2030" opacity="0.85">
+    <circle cx="40"   cy="40"  r="1"/><circle cx="120"  cy="40"  r="1"/><circle cx="200"  cy="40"  r="1"/><circle cx="280"  cy="40"  r="1"/><circle cx="360"  cy="40"  r="1"/><circle cx="440"  cy="40"  r="1"/><circle cx="520"  cy="40"  r="1"/><circle cx="600"  cy="40"  r="1"/><circle cx="680"  cy="40"  r="1"/><circle cx="760"  cy="40"  r="1"/><circle cx="840"  cy="40"  r="1"/><circle cx="920"  cy="40"  r="1"/><circle cx="1000" cy="40"  r="1"/><circle cx="1080" cy="40"  r="1"/>
     <circle cx="40"   cy="280" r="1"/><circle cx="120"  cy="280" r="1"/><circle cx="200"  cy="280" r="1"/><circle cx="280"  cy="280" r="1"/><circle cx="360"  cy="280" r="1"/><circle cx="440"  cy="280" r="1"/><circle cx="520"  cy="280" r="1"/><circle cx="600"  cy="280" r="1"/><circle cx="680"  cy="280" r="1"/><circle cx="760"  cy="280" r="1"/><circle cx="840"  cy="280" r="1"/><circle cx="920"  cy="280" r="1"/><circle cx="1000" cy="280" r="1"/><circle cx="1080" cy="280" r="1"/><circle cx="1160" cy="280" r="1"/><circle cx="1240" cy="280" r="1"/>
+  </g>
+
+  <!-- distant scout with warp trail (purple, going right) -->
+  <g opacity="0.8">
+    <line x1="780" y1="62" x2="888" y2="62" stroke="url(#warpTrail)" stroke-width="1.2"/>
+    <polygon points="892,62 880,58 882,62 880,66" fill="#B084CC"/>
+  </g>
+
+  <!-- second distant scout (cyan, lower altitude) -->
+  <g opacity="0.7">
+    <line x1="700" y1="240" x2="790" y2="240" stroke="url(#warpTrail2)" stroke-width="0.9"/>
+    <polygon points="794,240 784,237 785,240 784,243" fill="#36BCF7"/>
+  </g>
+
+  <!-- alien saucer, top right area -->
+  <g transform="translate(1080, 130)" opacity="0.95">
+    <!-- engine glow underneath -->
+    <ellipse cx="0" cy="14" rx="32" ry="6" fill="url(#ufoglow)"/>
+    <!-- bottom disc -->
+    <ellipse cx="0" cy="6"  rx="48" ry="5" fill="#0d1117" stroke="#36BCF7" stroke-width="1.1"/>
+    <!-- mid ring lights -->
+    <circle cx="-30" cy="6" r="1.2" fill="#FFD700"/>
+    <circle cx="-15" cy="6" r="1.2" fill="#36BCF7"/>
+    <circle cx="0"   cy="6" r="1.2" fill="#FFD700"/>
+    <circle cx="15"  cy="6" r="1.2" fill="#36BCF7"/>
+    <circle cx="30"  cy="6" r="1.2" fill="#FFD700"/>
+    <!-- top dome -->
+    <path d="M -28 6 Q -28 -12, 0 -12 Q 28 -12, 28 6 Z" fill="#0d1117" stroke="#B084CC" stroke-width="1.1"/>
+    <!-- dome highlight -->
+    <path d="M -16 -3 Q -10 -10, 0 -11" fill="none" stroke="#B084CC" stroke-width="0.6" opacity="0.7"/>
+    <!-- dome portholes -->
+    <circle cx="-10" cy="-1" r="1.6" fill="#FF6B35"/>
+    <circle cx="0"   cy="-3" r="1.6" fill="#FF6B35"/>
+    <circle cx="10"  cy="-1" r="1.6" fill="#FF6B35"/>
+  </g>
+
+  <!-- escort fighter, mid-right (TIE-style, alien geometry) -->
+  <g transform="translate(940, 200)" opacity="0.85">
+    <!-- wing planes -->
+    <line x1="-22" y1="-14" x2="-22" y2="14" stroke="#36BCF7" stroke-width="2"/>
+    <line x1="22"  y1="-14" x2="22"  y2="14" stroke="#36BCF7" stroke-width="2"/>
+    <line x1="-22" y1="-12" x2="-22" y2="12" stroke="#36BCF7" stroke-width="4" opacity="0.25"/>
+    <line x1="22"  y1="-12" x2="22"  y2="12" stroke="#36BCF7" stroke-width="4" opacity="0.25"/>
+    <!-- wing struts -->
+    <line x1="-22" y1="0" x2="-7"  y2="0" stroke="#36BCF7" stroke-width="0.9"/>
+    <line x1="7"   y1="0" x2="22"  y2="0" stroke="#36BCF7" stroke-width="0.9"/>
+    <!-- center pod -->
+    <circle cx="0" cy="0" r="7" fill="#0d1117" stroke="#36BCF7" stroke-width="1.1"/>
+    <!-- cockpit eye -->
+    <circle cx="0" cy="0" r="3"   fill="#FF6B35"/>
+    <circle cx="0" cy="0" r="1.2" fill="#FFD700"/>
   </g>
 
   <!-- title -->
@@ -27,17 +114,11 @@
 
   <!-- glyph strip -->
   <g transform="translate(80, 246)" stroke="#36BCF7" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <!-- read (eye) -->
     <g transform="translate(0,0)"><path d="M2 16s5-9 14-9 14 9 14 9-5 9-14 9S2 16 2 16z"/><circle cx="16" cy="16" r="4" stroke="#FF6B35"/><circle cx="16" cy="16" r="1.2" fill="#FF6B35" stroke="none"/></g>
-    <!-- name (tag) -->
     <g transform="translate(56,0)"><path d="M4 14V6a2 2 0 0 1 2-2h8l14 14-12 12L2 16a2 2 0 0 1 0-2z"/><circle cx="10" cy="10" r="1.6" fill="#FF6B35" stroke="#FF6B35"/></g>
-    <!-- small (atom) -->
     <g transform="translate(112,0)"><circle cx="16" cy="16" r="2.2" fill="#FF6B35" stroke="#FF6B35"/><ellipse cx="16" cy="16" rx="13" ry="5"/><ellipse cx="16" cy="16" rx="13" ry="5" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="13" ry="5" transform="rotate(120 16 16)"/></g>
-    <!-- delete (scissors) -->
     <g transform="translate(168,0)"><circle cx="8" cy="22" r="4"/><circle cx="8" cy="10" r="4"/><line x1="11" y1="13" x2="29" y2="6" stroke="#FF6B35"/><line x1="11" y1="19" x2="29" y2="26" stroke="#FF6B35"/><line x1="20" y1="9.5" x2="20" y2="22.5"/></g>
-    <!-- evidence (pulse) -->
     <g transform="translate(224,0)"><path d="M2 16h6l3-9 4 18 3-12 3 7 2-4h7"/><circle cx="11" cy="7" r="1.6" fill="#FF6B35" stroke="#FF6B35"/></g>
-    <!-- failure (broken link) -->
     <g transform="translate(280,0)"><path d="M14 6l-6 6a4.2 4.2 0 0 0 5.9 5.9l3-3"/><path d="M18 26l6-6a4.2 4.2 0 0 0-5.9-5.9l-3 3"/><path d="M13 18l-3 3" stroke="#FF6B35"/><path d="M19 14l3-3" stroke="#FF6B35"/></g>
   </g>
 
