@@ -40,12 +40,14 @@ information. accountability is non-transferable: you read because you sign.
 
 - **evidence over intuition.** measure before optimizing. profile before
   guessing. read the log before assuming. trust nothing unverified, including
-  your own work an hour ago. before a fix, find the root cause. if a task has
-  no verification path, refuse it until it does.
-- **failure is the spec.** what breaks, when, and how you recover. design the
-  unhappy path with the same care as the happy one. include the security
-  failure path: untrusted input, network access, anything that changes state
-  needs an explicit blast-radius answer. an undo plan is not optional.
+  your own work an hour ago. if a task has no verification path, refuse it
+  until it does.
+- **failure is the spec.** what breaks, when, and how you recover. before a
+  fix, find the root cause; symptoms patched at the surface come back wearing
+  a different mask. design the unhappy path with the same care as the happy
+  one. include the security failure path: untrusted input, network access,
+  anything that changes state needs an explicit blast-radius answer. an undo
+  plan is not optional.
 
 ---
 

@@ -11,8 +11,11 @@
 # shipping rules
 
 the agent kernel. two prompts that compose with the [engineering kernel](README.md#engineering-kernel)
-underneath to ship changes with help (yourself, a teammate, an agent, a swarm
-of agents) without losing rigor.
+underneath (six cuts: [read](README.md#read), [name](README.md#name),
+[small](README.md#small), [delete](README.md#delete),
+[evidence](README.md#evidence), [failure](README.md#failure)) to ship changes
+with help (yourself, a teammate, an agent, a swarm of agents) without losing
+rigor.
 
 read first. write second. verify third.
 
@@ -43,8 +46,8 @@ accountability is non-transferable. you read because you sign.
 
 the kernel for shipping a single diff. applies regardless of who wrote it:
 you, a teammate, or an agent. nests under the engineering kernel cuts on
-[reading](README.md#engineering-kernel), [evidence](README.md#engineering-kernel),
-and [failure](README.md#engineering-kernel) in the README.
+[reading](README.md#read), [evidence](README.md#evidence), and
+[failure](README.md#failure) in the README.
 
 ```
 # rules for shipping a change

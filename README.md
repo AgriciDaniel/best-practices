@@ -4,8 +4,9 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-36BCF7?style=flat-square" alt="MIT"/></a>
-  <img src="https://img.shields.io/badge/voice-karpathy--terse-FF6B35?style=flat-square" alt="voice: karpathy-terse"/>
+  <img src="https://img.shields.io/badge/voice-aphoristic-FF6B35?style=flat-square" alt="voice: aphoristic"/>
   <img src="https://img.shields.io/badge/six%20cuts-three%20acts-B084CC?style=flat-square" alt="six cuts · three acts"/>
+  <a href="scripts/lint.sh"><img src="https://img.shields.io/badge/lint-scripted-FFD700?style=flat-square" alt="lint: scripted"/></a>
 </p>
 
 # best-practices
@@ -39,6 +40,7 @@ each layer assumes the one below. flatten them and the hierarchy collapses.
 six cuts. three acts. these are the rules that make any of the rest possible.
 shipping-rules sits on top.
 
+<a id="read"></a>
 ### before
 
 <table>
@@ -54,7 +56,7 @@ as often as additions.
 </tr>
 <tr>
 <td valign="top" width="56"><img src="svg/cut-02-name.svg" width="44"/></td>
-<td>
+<td><a id="name"></a>
 
 **name like the next reader is hostile.** good names carry context, bad names
 hide bugs. if you cannot name it cleanly, you do not understand it yet. rename
@@ -64,6 +66,7 @@ when meaning shifts.
 </tr>
 </table>
 
+<a id="small"></a>
 ### during
 
 <table>
@@ -80,7 +83,7 @@ callers.
 </tr>
 <tr>
 <td valign="top" width="56"><img src="svg/cut-04-delete.svg" width="44"/></td>
-<td>
+<td><a id="delete"></a>
 
 **delete more than you add.** code is liability, not asset. dead code, dead
 tests, dead branches, dead flags. carry only what earns its weight every week.
@@ -89,6 +92,7 @@ tests, dead branches, dead flags. carry only what earns its weight every week.
 </tr>
 </table>
 
+<a id="evidence"></a>
 ### after
 
 <table>
@@ -98,19 +102,21 @@ tests, dead branches, dead flags. carry only what earns its weight every week.
 
 **evidence over intuition.** measure before optimizing. profile before
 guessing. read the log before assuming. trust nothing unverified, including
-your own work an hour ago. before a fix, find the root cause. if a task has
-no verification path, refuse it until it does.
+your own work an hour ago. if a task has no verification path, refuse it
+until it does.
 
 </td>
 </tr>
 <tr>
 <td valign="top" width="56"><img src="svg/cut-06-failure.svg" width="44"/></td>
-<td>
+<td><a id="failure"></a>
 
-**failure is the spec.** what breaks, when, and how you recover. design the
-unhappy path with the same care as the happy one. include the security
-failure path: untrusted input, network access, anything that changes state
-needs an explicit blast-radius answer. an undo plan is not optional.
+**failure is the spec.** what breaks, when, and how you recover. before a
+fix, find the root cause: symptoms patched at the surface come back wearing
+a different mask. design the unhappy path with the same care as the happy
+one. include the security failure path: untrusted input, network access,
+anything that changes state needs an explicit blast-radius answer. an undo
+plan is not optional.
 
 </td>
 </tr>
@@ -165,45 +171,71 @@ wrong in public.
 
 ## install
 
-four paths. pick one or stack them.
+clone first, copy what you need. nothing here uses curl, so it works against
+private and public repos identically.
+
+```bash
+git clone https://github.com/AgriciDaniel/best-practices.git
+cd best-practices
+```
+
+then pick one or more paths.
 
 ### claude code: skill (auto-loads on relevant work)
 
 ```bash
-git clone https://github.com/AgriciDaniel/best-practices.git \
-  ~/.claude/skills/best-practices
+mkdir -p ~/.claude/skills/best-practices
+cp SKILL.md ~/.claude/skills/best-practices/
 ```
 
-claude code reads `SKILL.md` and auto-injects the kernel when you start a
-non-trivial diff, plan a change, review code, or debug. no manual trigger.
+claude code reads `~/.claude/skills/best-practices/SKILL.md` and auto-injects
+the kernel when the description matches your prompt. only `SKILL.md` ends up
+in the skill directory: no `.git`, no docs, no svg assets.
 
 ### claude code: slash command (explicit invocation)
 
 ```bash
 mkdir -p ~/.claude/commands
-curl -sL https://raw.githubusercontent.com/AgriciDaniel/best-practices/main/best-practices.md \
-  -o ~/.claude/commands/best-practices.md
+cp best-practices.md ~/.claude/commands/
 ```
 
-then `/best-practices` injects the full kernel, or `/best-practices evidence`
-injects just the evidence cut. nine sections addressable: `stance`,
+then `/best-practices` injects the full kernel, and `/best-practices <section>`
+injects just one section. **ten** sections addressable: `stance`,
 `engineering`, `agent`, `loop`, `read`, `name`, `small`, `delete`, `evidence`,
-`failure`.
+`failure`. unrecognized arguments fall through to the full kernel with a
+single-line note.
 
-### cursor / continue / cline / aider / codex / gemini cli
+### claude code: project CLAUDE.md (shared with the team)
 
-paste `AGENTS.md` (the portable kernel) into your rules file. no
-claude-code-specific syntax.
+claude code reads `CLAUDE.md` at the repo root, not `AGENTS.md`. for
+project-scoped enforcement, copy the kernel into `CLAUDE.md`:
 
-- cursor: `.cursor/rules/best-practices.md`
-- continue: `.continuerules`
-- cline: `.clinerules`
-- aider: `.aider.conf.yml` rules section
-- codex / gemini cli / generic: drop in as `AGENTS.md` at repo root
+```bash
+cp AGENTS.md /path/to/your/project/CLAUDE.md
+```
 
-### project-level
+### codex / gemini cli / openai agents
 
-add `AGENTS.md` at the repo root. agents read it. humans read it. one source.
+these tools read `AGENTS.md` at the repo root by convention.
+
+```bash
+cp AGENTS.md /path/to/your/project/AGENTS.md
+```
+
+### cursor / continue / cline / aider
+
+each tool has its own rules file convention and the conventions move. drop the
+`AGENTS.md` content into your tool's current path. starting points (verify
+against current docs before committing):
+
+- **cursor:** `.cursor/rules/best-practices.mdc` (with frontmatter wrapper).
+- **continue:** `~/.continue/config.json` rules array, or older
+  `.continuerules` file.
+- **cline:** `.clinerules` (file or directory) at repo root.
+- **aider:** pass with `--read AGENTS.md` or via `.aider.conf.yml`.
+
+if your tool is not listed, `AGENTS.md` is plain markdown and works as a
+generic rules file in any harness that loads markdown.
 
 ---
 
