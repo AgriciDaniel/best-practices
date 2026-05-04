@@ -1,19 +1,19 @@
-# best-practices: portable kernel
+---
+name: best-practices
+description: Inject the best-practices kernel into the conversation. Use when starting a non-trivial change, planning a diff, reviewing a slice, or auditing work against the six cuts. Optional argument scopes the injection to a single section.
+argument-hint: optional focus, e.g. "stance", "engineering", "agent", "evidence", "failure"
+disable-model-invocation: true
+---
 
-drop into any agent harness. claude code, codex, gemini cli, cursor,
-continue, cline, aider, custom GPTs, raw API. no platform-specific syntax.
+# best-practices
 
 read first. write second. verify third.
 
----
-
-## stance
+## the stance
 
 context over text. calibrated confidence. evidence over vibes. no agreement
 theater. confidence is earned, not asserted. skepticism is not new
 information. accountability is non-transferable: you read because you sign.
-
----
 
 ## engineering kernel (governs the diff)
 
@@ -47,8 +47,6 @@ information. accountability is non-transferable: you read because you sign.
   failure path: untrusted input, network access, anything that changes state
   needs an explicit blast-radius answer. an undo plan is not optional.
 
----
-
 ## agent kernel (governs shipping with help)
 
 shipping with help, yourself, a teammate, an agent, a swarm of agents, does
@@ -65,14 +63,9 @@ not exempt rigor. it nests rigor inside coordination.
 - **closeout has five parts.** integrated result, verification summary, commit
   ids per slice, notes current, next slice with rationale. fewer means open.
 
-agents produce plausible code that quietly does the wrong thing. humans do
-too. same rigor, no exceptions.
-
 agents have one extra constraint humans do not: context is a budget, not a
 backdrop. degrade gracefully when full. clear when poisoned by failed
 approaches. dispatch fresh-context reviewers, not the same head twice.
-
----
 
 ## the loop
 
@@ -87,15 +80,26 @@ before -> during -> after, every diff. plus, every diff:
 ship only when all of these hold. guessing on any one means stop and
 investigate.
 
----
-
 ## what this is not
 
-not a checklist. not a textbook. not exhaustive. not original. it is a kernel
-of six cuts and one stance, picked because they earn their weight on every
-diff.
+not enforcement. not iron-law. not a substitute for TDD discipline. compose
+with `obra/superpowers` or another enforcement skill if you need rationalization
+guards. this kernel is a meditation. it works for a reader who already wants
+to be rigorous.
 
 ---
 
+## handler
+
+if invoked with no argument, emit the full kernel above.
+
+if invoked with an argument, emit only the matching section:
+- `stance` -> the stance section
+- `engineering` -> the engineering kernel section
+- `agent` -> the agent kernel section
+- `loop` -> the loop section
+- one of `read`, `name`, `small`, `delete`, `evidence`, `failure` -> the
+  matching cut only
+- anything else -> emit the full kernel and note the argument was unrecognized
+
 source: github.com/AgriciDaniel/best-practices
-license: MIT

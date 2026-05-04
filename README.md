@@ -98,7 +98,8 @@ tests, dead branches, dead flags. carry only what earns its weight every week.
 
 **evidence over intuition.** measure before optimizing. profile before
 guessing. read the log before assuming. trust nothing unverified, including
-your own work an hour ago.
+your own work an hour ago. before a fix, find the root cause. if a task has
+no verification path, refuse it until it does.
 
 </td>
 </tr>
@@ -107,8 +108,9 @@ your own work an hour ago.
 <td>
 
 **failure is the spec.** what breaks, when, and how you recover. design the
-unhappy path with the same care as the happy one. an undo plan is not
-optional.
+unhappy path with the same care as the happy one. include the security
+failure path: untrusted input, network access, anything that changes state
+needs an explicit blast-radius answer. an undo plan is not optional.
 
 </td>
 </tr>
@@ -140,13 +142,19 @@ the full text lives in [shipping-rules.md](shipping-rules.md). the kernel is:
 agents produce plausible code that quietly does the wrong thing. humans do
 too. same rigor, no exceptions.
 
+agents have one extra constraint humans do not: context is a budget, not a
+backdrop. degrade gracefully when full. clear when poisoned by failed
+approaches. dispatch fresh-context reviewers, not the same head twice. the
+reviewer who never wrote the code spots more than the writer who just
+finished it.
+
 ---
 
 ## the stance
 
 context over text. calibrated confidence. evidence over vibes. no agreement
 theater. confidence is earned, not asserted. skepticism is not new
-information.
+information. accountability is non-transferable: you read because you sign.
 
 the stance is what makes the rest of this file work. without it, the kernel
 becomes a checklist, and a checklist is ceremony, not rigor. the rules are
@@ -155,48 +163,85 @@ wrong in public.
 
 ---
 
-## how to use
+## install
 
-drop the file into your agent of choice. one front door, three install paths.
+four paths. pick one or stack them.
 
-### claude code
+### claude code: skill (auto-loads on relevant work)
 
 ```bash
-git clone https://github.com/AgriciDaniel/best-practices.git ~/.claude/best-practices
-ln -s ~/.claude/best-practices/README.md ~/.claude/CLAUDE.md.d/best-practices.md
+git clone https://github.com/AgriciDaniel/best-practices.git \
+  ~/.claude/skills/best-practices
 ```
 
-or paste the engineering kernel section into your `CLAUDE.md` directly.
+claude code reads `SKILL.md` and auto-injects the kernel when you start a
+non-trivial diff, plan a change, review code, or debug. no manual trigger.
 
-### cursor / continue / cline / aider
+### claude code: slash command (explicit invocation)
 
-paste the engineering kernel and the agent kernel into your rules file:
+```bash
+mkdir -p ~/.claude/commands
+curl -sL https://raw.githubusercontent.com/AgriciDaniel/best-practices/main/best-practices.md \
+  -o ~/.claude/commands/best-practices.md
+```
+
+then `/best-practices` injects the full kernel, or `/best-practices evidence`
+injects just the evidence cut. nine sections addressable: `stance`,
+`engineering`, `agent`, `loop`, `read`, `name`, `small`, `delete`, `evidence`,
+`failure`.
+
+### cursor / continue / cline / aider / codex / gemini cli
+
+paste `AGENTS.md` (the portable kernel) into your rules file. no
+claude-code-specific syntax.
 
 - cursor: `.cursor/rules/best-practices.md`
 - continue: `.continuerules`
 - cline: `.clinerules`
 - aider: `.aider.conf.yml` rules section
-
-### portable
-
-`AGENTS.md` is the platform-neutral version of this kernel, designed to drop
-into any agent harness with no claude-code-specific syntax.
+- codex / gemini cli / generic: drop in as `AGENTS.md` at repo root
 
 ### project-level
 
-if a project needs the kernel as a constraint, add it as `AGENTS.md` at the
-repo root. agents read it. humans read it. one source.
+add `AGENTS.md` at the repo root. agents read it. humans read it. one source.
 
 ---
 
+## how it composes
+
+- needs **enforcement** for adversarial agents (rationalization guards, iron
+  laws, red-flag stop-words) -> stack [obra/superpowers](https://github.com/obra/superpowers)
+- needs **iron-law TDD** -> `superpowers:test-driven-development`
+- needs **debugging discipline** -> `superpowers:systematic-debugging`
+- needs **parallel-agent SOP** -> `superpowers:dispatching-parallel-agents`
+
+this kernel is the meditation. those are the enforcement. compose, do not
+substitute.
+
+---
+
+## what this is
+
+a meditation. six axioms compressed into something you reread on a monday
+morning when you forgot why you ship the way you ship. it works for a person
+or an agent who already wants to be rigorous.
+
 ## what this is not
 
-- not a checklist. checklists rot. kernels compress.
-- not a textbook. textbooks are for things you forget. this is for things you
-  use.
-- not exhaustive. exhaustive lists are the enemy of rereading. six cuts is the
-  point.
-- not original in the sense of inventing axioms. original in the sense of
+- **not a checklist.** checklists rot. kernels compress.
+- **not a textbook.** textbooks are for things you forget. this is for things
+  you use.
+- **not exhaustive.** exhaustive lists are the enemy of rereading. six cuts is
+  the point.
+- **not an enforcement layer.** there is no iron-law framing here, no
+  rationalization-blocking tables, no red-flag stop-words. the kernel will not
+  defend itself against an agent that decides to skip steps. for that, compose
+  with [obra/superpowers](https://github.com/obra/superpowers) or another
+  enforcement-grade ruleset.
+- **not a substitute for TDD discipline.** cuts 5 and 6 imply tests, they do
+  not mandate red-green-refactor. if you need iron-law TDD, install the
+  superpowers `test-driven-development` skill on top of this kernel.
+- **not original in the sense of inventing axioms.** original in the sense of
   picking the load-bearing few and naming them clearly.
 
 ---
