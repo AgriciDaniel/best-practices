@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="#36BCF7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="read before write">
+  <title>read before write</title>
+  <path d="M2 16s5-9 14-9 14 9 14 9-5 9-14 9S2 16 2 16z"/>
+  <circle cx="16" cy="16" r="4" stroke="#FF6B35"/>
+  <circle cx="16" cy="16" r="1.2" fill="#FF6B35" stroke="none"/>
+</svg>
