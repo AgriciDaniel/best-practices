@@ -1,7 +1,8 @@
 # best-practices: portable kernel
 
-drop into any agent harness. claude code, codex, gemini cli, cursor,
-continue, cline, aider, custom GPTs, raw API. no platform-specific syntax.
+drop into any agent harness. claude code, codex, cursor, antigravity,
+gemini cli, continue, cline, aider, custom GPTs, raw API. no
+platform-specific syntax.
 
 read first. write second. verify third.
 

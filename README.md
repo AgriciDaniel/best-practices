@@ -16,6 +16,10 @@ one kernel for shipping changes. one engineering layer underneath, one agent
 layer on top. small enough to reread, dense enough to matter. no fluff, no
 theater, no agreement for the sake of agreement.
 
+works as a claude code skill and slash command, a codex skill and `AGENTS.md`,
+and a portable markdown kernel for cursor, antigravity, gemini cli, continue,
+cline, aider, custom GPTs, and raw API harnesses.
+
 read first. write second. verify third.
 
 ---
@@ -282,7 +286,7 @@ project-scoped contract, copy the kernel into `CLAUDE.md`:
 cp AGENTS.md /path/to/your/project/CLAUDE.md
 ```
 
-### gemini cli / openai agents / other AGENTS.md readers
+### antigravity / gemini cli / openai agents / other AGENTS.md readers
 
 these tools read `AGENTS.md` at the repo root by convention.
 
@@ -290,13 +294,19 @@ these tools read `AGENTS.md` at the repo root by convention.
 cp AGENTS.md /path/to/your/project/AGENTS.md
 ```
 
-### cursor / continue / cline / aider
+for antigravity, prefer `AGENTS.md` when your version supports it. if your
+setup still expects `GEMINI.md` or an antigravity-specific rules file, use a
+thin wrapper there that points at `AGENTS.md`, or paste the same kernel text.
+
+### cursor / antigravity / continue / cline / aider
 
 each tool has its own rules file convention and the conventions move. drop the
 `AGENTS.md` content into your tool's current path. starting points (verify
 against current docs before committing):
 
 - **cursor:** `.cursor/rules/best-practices.mdc` (with frontmatter wrapper).
+- **antigravity:** `AGENTS.md` at repo root when supported; otherwise a thin
+  `GEMINI.md` or antigravity rules wrapper that points to `AGENTS.md`.
 - **continue:** `~/.continue/config.json` rules array, or older
   `.continuerules` file.
 - **cline:** `.clinerules` (file or directory) at repo root.
