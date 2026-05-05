@@ -195,6 +195,25 @@ the layering matters. orchestration governs the team. per-change governs
 the diff. flatten them and you lose the hierarchy that makes either one
 useful.
 
+## codex subagents
+
+[codex subagents](https://developers.openai.com/codex/concepts/subagents) are
+the orchestration layer with handles. the official docs frame them as explicit
+parallel delegation: the main thread stays focused, subagents do bounded work,
+and summaries come back for integration.
+
+- ask explicitly. codex does not spawn subagents by default.
+- keep the main thread for requirements, decisions, and closeout.
+- prefer read-heavy fan-out first: exploration, tests, triage, log analysis.
+- give every subagent one role, one boundary, and one return format.
+- parallel writes need disjoint write scopes, or separate worktrees when the
+  work truly branches.
+- use `/agent` to inspect active threads. use `/fork` only when the work splits
+  into a real branch.
+
+the built-ins map cleanly: `explorer` maps, `worker` implements, the chair
+integrates, and a fresh reviewer gates acceptance.
+
 ---
 
 ## license

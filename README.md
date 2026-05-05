@@ -155,6 +155,31 @@ approaches. dispatch fresh-context reviewers, not the same head twice. the
 reviewer who never wrote the code spots more than the writer who just
 finished it.
 
+### codex subagents
+
+<p align="center">
+  <img src="svg/codex-subagents.svg" alt="codex subagents: one chair, bounded roles, summarized return" width="100%"/>
+</p>
+
+codex makes the agent kernel concrete with
+[subagents](https://developers.openai.com/codex/concepts/subagents). the main
+thread stays clean: requirements, decisions, integration, closeout. subagents
+take bounded noisy work: exploration, tests, triage, log analysis, or a slice
+with a disjoint write scope.
+
+do not fan out by default. codex only spawns subagents when asked explicitly,
+and each subagent spends its own model and tool budget. write the acceptance
+bar before the spawn. ask for summaries, not raw tool spew.
+
+| kernel rule | codex shape |
+|-------------|-------------|
+| one chair | main thread owns requirements, decisions, and integration |
+| bounded slices | one subagent per role or write scope |
+| explorers map | `explorer` or read-only custom agents gather evidence |
+| workers implement | `worker` owns one narrow slice |
+| verifiers gate | fresh-context review checks bugs, security, and tests |
+| context is a budget | subagents return distilled findings to the main thread |
+
 ---
 
 ## the stance
@@ -216,6 +241,11 @@ cp AGENTS.md /path/to/your/project/AGENTS.md
 the hybrid shape is intentional: `SKILL.md` is the reusable global meditation,
 `AGENTS.md` is the repo-local operating contract. use both when you want codex
 to remember the kernel generally and carry it specifically inside a project.
+
+for bigger work, add codex subagents on top: ask explicitly for parallel
+agents, keep read-heavy work off the main thread, and use separate write scopes
+or worktrees before letting multiple agents edit at once. codex surfaces active
+agent threads through `/agent`; use `/fork` only when the work truly branches.
 
 ### claude code: skill (auto-loads on relevant work)
 

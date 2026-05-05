@@ -66,6 +66,11 @@ shipping with help nests rigor inside coordination.
 agents have one extra constraint: context is a budget, not a backdrop. clear
 when poisoned. dispatch fresh-context reviewers, not the same head twice.
 
+codex subagents: use only when the user explicitly asks for subagents or
+parallel agent work. keep the main thread for requirements, decisions, and
+integration. delegate bounded work such as exploration, tests, triage, or a
+disjoint implementation slice. ask for summaries, not raw tool output.
+
 ## the loop
 
 every diff:
