@@ -1,6 +1,6 @@
 ---
 name: best-practices
-description: Use before a non-trivial multi-file diff, before a multi-slice agent run, or when auditing a major change. Loads the six-cut kernel.
+description: Use before a non-trivial multi-file diff, before a multi-slice agent run, or when auditing a major change in Codex, Claude Code, or any agent harness. Loads the six-cut kernel.
 license: MIT
 ---
 

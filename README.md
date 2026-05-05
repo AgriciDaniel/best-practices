@@ -5,6 +5,7 @@
 <p align="center">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-36BCF7?style=for-the-badge&logo=opensourceinitiative&logoColor=white"></a>
   <a href="SKILL.md"><img alt="Claude Code skill" src="https://img.shields.io/badge/claude_code-skill_%2B_slash-FF6B35?style=for-the-badge&logo=anthropic&logoColor=white"></a>
+  <a href="agents/openai.yaml"><img alt="Codex skill" src="https://img.shields.io/badge/codex-skill_%2B_AGENTS.md-10A37F?style=for-the-badge&logo=openai&logoColor=white"></a>
   <a href="https://github.com/obra/superpowers"><img alt="composes with superpowers" src="https://img.shields.io/badge/composes_with-superpowers-B084CC?style=for-the-badge&logo=github&logoColor=white"></a>
   <img alt="six cuts · three acts" src="https://img.shields.io/badge/six_cuts-three_acts-0d1117?style=for-the-badge&labelColor=36BCF7">
 </p>
@@ -181,6 +182,41 @@ cd best-practices
 
 then pick one or more paths.
 
+### codex: skill (auto-loads on relevant work)
+
+```bash
+mkdir -p ~/.codex/skills/best-practices/agents
+cp SKILL.md ~/.codex/skills/best-practices/
+cp agents/openai.yaml ~/.codex/skills/best-practices/agents/
+```
+
+codex reads `~/.codex/skills/best-practices/SKILL.md` as the loadable skill.
+`agents/openai.yaml` is optional metadata for the skill list and default
+prompt. the skill is global: it gives codex the kernel when the work calls for
+it, but it does not make every repo inherit the kernel.
+
+### codex: project AGENTS.md (repo-local contract)
+
+```bash
+cp AGENTS.md /path/to/your/project/AGENTS.md
+```
+
+codex reads `AGENTS.md` at the repo root. use this when the project itself
+should carry the kernel for every codex session in that repository.
+
+### codex: hybrid install (recommended)
+
+```bash
+mkdir -p ~/.codex/skills/best-practices/agents
+cp SKILL.md ~/.codex/skills/best-practices/
+cp agents/openai.yaml ~/.codex/skills/best-practices/agents/
+cp AGENTS.md /path/to/your/project/AGENTS.md
+```
+
+the hybrid shape is intentional: `SKILL.md` is the reusable global meditation,
+`AGENTS.md` is the repo-local operating contract. use both when you want codex
+to remember the kernel generally and carry it specifically inside a project.
+
 ### claude code: skill (auto-loads on relevant work)
 
 ```bash
@@ -209,14 +245,14 @@ single-line note.
 
 ### claude code: project CLAUDE.md (shared with the team)
 
-claude code reads `CLAUDE.md` at the repo root, not `AGENTS.md`. for
-project-scoped enforcement, copy the kernel into `CLAUDE.md`:
+claude code reads `CLAUDE.md` at the repo root, not `AGENTS.md`. for a
+project-scoped contract, copy the kernel into `CLAUDE.md`:
 
 ```bash
 cp AGENTS.md /path/to/your/project/CLAUDE.md
 ```
 
-### codex / gemini cli / openai agents
+### gemini cli / openai agents / other AGENTS.md readers
 
 these tools read `AGENTS.md` at the repo root by convention.
 

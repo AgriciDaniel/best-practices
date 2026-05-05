@@ -1,0 +1,4 @@
+interface:
+  display_name: "Best Practices"
+  short_description: "Load the six-cut shipping kernel"
+  default_prompt: "Use $best-practices before reviewing this diff."
