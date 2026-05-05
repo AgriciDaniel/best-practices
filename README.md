@@ -4,7 +4,6 @@
 
 <p align="center">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-36BCF7?style=for-the-badge&logo=opensourceinitiative&logoColor=white"></a>
-  <a href="https://github.com/AgriciDaniel/best-practices/actions/workflows/lint.yml"><img alt="lint" src="https://img.shields.io/github/actions/workflow/status/AgriciDaniel/best-practices/lint.yml?style=for-the-badge&label=lint&logo=githubactions&logoColor=white&color=FFD700"></a>
   <a href="SKILL.md"><img alt="Claude Code skill" src="https://img.shields.io/badge/claude_code-skill_%2B_slash-FF6B35?style=for-the-badge&logo=anthropic&logoColor=white"></a>
   <a href="https://github.com/obra/superpowers"><img alt="composes with superpowers" src="https://img.shields.io/badge/composes_with-superpowers-B084CC?style=for-the-badge&logo=github&logoColor=white"></a>
   <img alt="six cuts · three acts" src="https://img.shields.io/badge/six_cuts-three_acts-0d1117?style=for-the-badge&labelColor=36BCF7">
@@ -191,9 +190,9 @@ cp SKILL.md ~/.claude/skills/best-practices/
 
 claude code reads `~/.claude/skills/best-practices/SKILL.md` and auto-injects
 the kernel when the description matches your prompt. **copy `SKILL.md` only.
-do not `cp -r` the whole repo into the skill dir**, that would drop `.git`,
-`scripts/`, `.github/`, and other non-skill files alongside `SKILL.md`. only
-`SKILL.md` belongs in the skill dir.
+do not `cp -r` the whole repo into the skill dir**, that would drop `.git`
+and other non-skill files alongside `SKILL.md`. only `SKILL.md` belongs in
+the skill dir.
 
 ### claude code: slash command (explicit invocation)
 
