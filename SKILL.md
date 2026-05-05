@@ -1,6 +1,6 @@
 ---
 name: best-practices
-description: Use when starting a non-trivial diff, planning a change, reviewing a slice, or shipping with AI agents. Loads the six-cut engineering kernel and the agent kernel.
+description: Use before a non-trivial multi-file diff, before a multi-slice agent run, or when auditing a major change. Loads the six-cut kernel.
 license: MIT
 ---
 

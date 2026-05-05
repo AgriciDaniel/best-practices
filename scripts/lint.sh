@@ -1,25 +1,39 @@
 #!/usr/bin/env bash
 # scripts/lint.sh — best-practices repo health check.
 #
-# enforces the rules the audit caught: zero em dashes, valid frontmatter
-# under length budgets, valid SVG XML, no kernel drift across the four
-# kernel-bearing files. exits non-zero on any failure.
+# enforces the rules the audits caught:
+#   - zero em dashes anywhere
+#   - zero meow references
+#   - all SVGs valid XML
+#   - SKILL.md description under 200 chars, slash command under 250
+#   - all six kernel cuts present in all four kernel-bearing files
+#   - no curl-against-raw install commands in README
+#   - all per-cut anchors present in README
+#   - workflow has explicit `permissions:` block (defense in depth)
+#   - all `uses:` action references SHA-pinned (40 hex chars)
+#   - .gitignore covers common secret-file patterns
 #
 # usage: bash scripts/lint.sh
 # CI:    runs on push and PR via .github/workflows/lint.yml
 # local: install as pre-commit hook with
 #        ln -s ../../scripts/lint.sh .git/hooks/pre-commit
+#
+# strict mode notes: -u catches unset vars, pipefail catches mid-pipe failures.
+# we deliberately do NOT use -e because we want to collect every failure and
+# report all of them in a single run, not fail-fast on the first.
+
+set -uo pipefail
 
 cd "$(dirname "$0")/.."
 
 fail=0
 pass() { printf "  ok   %s\n" "$1"; }
-fail() { printf "  FAIL %s\n" "$1"; fail=1; }
+flag() { printf "  FAIL %s\n" "$1"; fail=1; }
 
 echo "==> em dash sweep (no \\u2014 anywhere in .md or .svg)"
 hits=$(grep -rln --include='*.md' --include='*.svg' -P "\x{2014}" . 2>/dev/null || true)
 if [[ -n "$hits" ]]; then
-  fail "em dashes found in:"
+  flag "em dashes found in:"
   echo "$hits" | sed 's/^/       /'
 else
   pass "zero em dashes"
@@ -28,7 +42,7 @@ fi
 echo "==> meow reference sweep"
 hits=$(grep -rln -i --include='*.md' --include='*.svg' -E '(meow|meowmeow)' . 2>/dev/null || true)
 if [[ -n "$hits" ]]; then
-  fail "meow refs found in:"
+  flag "meow refs found in:"
   echo "$hits" | sed 's/^/       /'
 else
   pass "zero meow references"
@@ -48,7 +62,8 @@ for f in sorted(glob.glob('svg/*.svg')):
         errs += 1
 sys.exit(1 if errs else 0)
 PY
-[[ $? -ne 0 ]] && fail=1
+rc=$?
+[[ $rc -ne 0 ]] && fail=1
 
 echo "==> frontmatter validation (SKILL.md, best-practices.md)"
 python3 - <<'PY'
@@ -77,7 +92,8 @@ for path, max_desc in checks:
         print(f"  ok   {path}: description {len(desc)}/{max_desc} chars")
 sys.exit(1 if errs else 0)
 PY
-[[ $? -ne 0 ]] && fail=1
+rc=$?
+[[ $rc -ne 0 ]] && fail=1
 
 echo "==> kernel drift check (six cuts present in all four kernel files)"
 python3 - <<'PY'
@@ -108,18 +124,19 @@ if not errs:
     print("  ok   all six cuts present in all four kernel files")
 sys.exit(1 if errs else 0)
 PY
-[[ $? -ne 0 ]] && fail=1
+rc=$?
+[[ $rc -ne 0 ]] && fail=1
 
 echo "==> README install path sanity (no raw.githubusercontent curl on a private repo)"
 if grep -E 'curl[^|]*raw\.githubusercontent\.com' README.md > /dev/null 2>&1; then
-  fail "README still uses curl against raw.githubusercontent.com (breaks on private repos)"
+  flag "README still uses curl against raw.githubusercontent.com (breaks on private repos)"
 else
   pass "no curl-against-raw install commands in README"
 fi
 
 echo "==> link target sanity (per-cut anchors exist in README)"
 python3 - <<'PY'
-import sys, re
+import sys
 text = open('README.md').read()
 expected = ['read', 'name', 'small', 'delete', 'evidence', 'failure']
 missing = [a for a in expected if f'<a id="{a}"></a>' not in text]
@@ -128,7 +145,51 @@ if missing:
     sys.exit(1)
 print("  ok   all six per-cut anchors present in README.md")
 PY
-[[ $? -ne 0 ]] && fail=1
+rc=$?
+[[ $rc -ne 0 ]] && fail=1
+
+echo "==> CI workflow security (permissions block + SHA-pinned actions)"
+python3 - <<'PY'
+import sys, re, glob
+errs = 0
+for wf in sorted(glob.glob('.github/workflows/*.yml')):
+    text = open(wf).read()
+    if 'permissions:' not in text:
+        print(f"  FAIL {wf}: missing top-level or job-level permissions: block")
+        errs += 1
+    uses_lines = re.findall(r'uses:\s*([^\s#]+)', text)
+    for ref in uses_lines:
+        # docker-style local references (./path or docker://) are exempt
+        if ref.startswith('.') or ref.startswith('docker://'):
+            continue
+        # require <owner>/<repo>@<40-hex-sha>
+        if not re.match(r'^[\w.-]+/[\w.-]+@[0-9a-f]{40}$', ref):
+            print(f"  FAIL {wf}: action '{ref}' is not pinned to a 40-char commit SHA")
+            errs += 1
+    if errs == 0:
+        print(f"  ok   {wf}: permissions present, all actions SHA-pinned")
+sys.exit(1 if errs else 0)
+PY
+rc=$?
+[[ $rc -ne 0 ]] && fail=1
+
+echo "==> .gitignore covers common secret-file patterns"
+python3 - <<'PY'
+import sys
+required = ['.env', '*.pem', '*.key', 'id_rsa', '.aws/', 'credentials.json']
+try:
+    text = open('.gitignore').read()
+except FileNotFoundError:
+    print("  FAIL .gitignore is missing")
+    sys.exit(1)
+missing = [p for p in required if p not in text]
+if missing:
+    print(f"  FAIL .gitignore missing patterns: {missing}")
+    sys.exit(1)
+print("  ok   .gitignore covers common secret-file patterns")
+PY
+rc=$?
+[[ $rc -ne 0 ]] && fail=1
 
 echo
 if [[ $fail -ne 0 ]]; then

@@ -190,8 +190,10 @@ cp SKILL.md ~/.claude/skills/best-practices/
 ```
 
 claude code reads `~/.claude/skills/best-practices/SKILL.md` and auto-injects
-the kernel when the description matches your prompt. only `SKILL.md` ends up
-in the skill directory: no `.git`, no docs, no svg assets.
+the kernel when the description matches your prompt. **copy `SKILL.md` only.
+do not `cp -r` the whole repo into the skill dir**, that would drop `.git`,
+`scripts/`, `.github/`, and other non-skill files alongside `SKILL.md`. only
+`SKILL.md` belongs in the skill dir.
 
 ### claude code: slash command (explicit invocation)
 

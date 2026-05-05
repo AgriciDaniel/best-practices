@@ -6,3 +6,20 @@
 .vscode/
 node_modules/
 *.log
+
+# secrets and credentials (forward-looking control)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+.aws/
+.ssh/
+secrets.yaml
+secrets.yml
+credentials.json
+*.kubeconfig
