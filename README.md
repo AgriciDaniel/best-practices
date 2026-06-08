@@ -7,6 +7,7 @@
   <a href="SKILL.md"><img alt="Claude Code skill" src="https://img.shields.io/badge/claude_code-skill_%2B_slash-FF6B35?style=for-the-badge&logo=anthropic&logoColor=white"></a>
   <a href="agents/openai.yaml"><img alt="Codex skill" src="https://img.shields.io/badge/codex-skill_%2B_AGENTS.md-10A37F?style=for-the-badge&logo=openai&logoColor=white"></a>
   <a href="https://github.com/obra/superpowers"><img alt="composes with superpowers" src="https://img.shields.io/badge/composes_with-superpowers-B084CC?style=for-the-badge&logo=github&logoColor=white"></a>
+  <a href="goaloop/README.md"><img alt="goaloop: the kernel as a loop" src="https://img.shields.io/badge/goaloop-the_kernel,_walked-9b6dd6?style=for-the-badge&logo=obsidian&logoColor=white"></a>
   <img alt="six cuts · three acts" src="https://img.shields.io/badge/six_cuts-three_acts-0d1117?style=for-the-badge&labelColor=36BCF7">
 </p>
 
@@ -37,6 +38,9 @@ read first. write second. verify third.
 | engineering kernel | the diff      | this README                                                 |
 
 each layer assumes the one below. flatten them and the hierarchy collapses.
+
+the three layers are the meditation. [goaloop](#goaloop) is the meditation made
+runnable: the same kernel as a loop you walk on one real goal, intent to undo.
 
 ---
 
@@ -186,6 +190,41 @@ bar before the spawn. ask for summaries, not raw tool spew.
 
 ---
 
+## goaloop
+
+<p align="center">
+  <img src="svg/goaloop.svg" alt="goaloop: ten checkpoints orbit a four-node control plane, the loop closes on itself" width="100%"/>
+</p>
+
+the kernel is a meditation. goaloop is the kernel made runnable: a fixed
+ten-checkpoint loop you point at one goal and walk, intent to undo, until the
+goal is met. it does not replace the cuts. it routes you through them.
+
+read sits at checkpoint 01, write at 03, verify at 04, the undo plan at 09.
+the loop closes on itself: an undo plan is not optional. a central core holds
+the command center; each pass feeds fixed checkpoints instead of spawning new
+notes, so the map stays a clean circle no matter how much you gather.
+
+the same rigor applies inside every checkpoint. acceptance criteria written
+before the work. evidence, with a source, before a claim enters the verify
+ledger. a bounded stop instead of an infinite loop. prune archives, it does
+not delete. the agent kernel applies when a checkpoint fans out: read
+dispatches explorers, verify dispatches fresh-context skeptics, the core is
+the one chair.
+
+it ships as an obsidian vault you can see and navigate, plus a claude code
+skill that scaffolds and drives it. enforcement is still superpowers; goaloop
+is operationalization. compose, do not substitute.
+
+<p align="center">
+  <img src="svg/goaloop-graph.png" alt="the live goaloop graph: ten interlinked checkpoints around a four-node control plane, no orphans" width="100%"/>
+  <br/><sub>the live graph: ten checkpoints interlinked around the control plane, no orphans.</sub>
+</p>
+
+→ [goaloop/](goaloop/) · [goaloop/README.md](goaloop/README.md)
+
+---
+
 ## the stance
 
 context over text. calibrated confidence. evidence over vibes. no agreement
@@ -276,6 +315,17 @@ injects just one section. **ten** sections addressable: `stance`,
 `engineering`, `agent`, `loop`, `read`, `name`, `small`, `delete`, `evidence`,
 `failure`. unrecognized arguments fall through to the full kernel with a
 single-line note.
+
+### claude code: goaloop (the kernel as a loop)
+
+```bash
+ln -s "$(pwd)/goaloop" ~/.claude/skills/goaloop
+```
+
+then `/goaloop "<goal>"` scaffolds and drives a ten-checkpoint loop for that
+goal as an obsidian vault, and routes the reference commands into each
+checkpoint. it is manually invoked, not auto-loaded. see
+[goaloop/README.md](goaloop/README.md).
 
 ### claude code: project CLAUDE.md (shared with the team)
 

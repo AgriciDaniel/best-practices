@@ -23,3 +23,7 @@ secrets.yaml
 secrets.yml
 credentials.json
 *.kubeconfig
+
+# python
+__pycache__/
+*.pyc
