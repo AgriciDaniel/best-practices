@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 520" role="img" aria-label="goaloop: ten checkpoints orbit a four-node control plane, the loop closes on itself">
   <title>goaloop: the kernel, walked</title>
   <rect width="1024" height="520" fill="#0d1117"/>
-  <text x="32" y="42" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#7d8590">goaloop: the kernel, walked. intent &#8594; read &#8594; write &#8594; verify &#8594; undo.</text>
+  <text x="32" y="42" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#7d8590">goaloop: the kernel, walked. intent -> read -> write -> verify -> undo.</text>
 
   <g stroke="#30363d" stroke-width="1"><line x1="512" y1="250" x2="512.0" y2="78.0"/><line x1="512" y1="250" x2="613.1" y2="110.8"/><line x1="512" y1="250" x2="675.6" y2="196.8"/><line x1="512" y1="250" x2="675.6" y2="303.2"/><line x1="512" y1="250" x2="613.1" y2="389.2"/><line x1="512" y1="250" x2="512.0" y2="422.0"/><line x1="512" y1="250" x2="410.9" y2="389.2"/><line x1="512" y1="250" x2="348.4" y2="303.2"/><line x1="512" y1="250" x2="348.4" y2="196.8"/><line x1="512" y1="250" x2="410.9" y2="110.8"/></g>
   <circle cx="512" cy="250" r="172" fill="none" stroke="#1f6feb" stroke-opacity="0.35" stroke-width="1.5"/>
