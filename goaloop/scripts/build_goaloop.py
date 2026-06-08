@@ -52,15 +52,8 @@ CORE_COLOR = "#e9e9f0"                 # near-white, reads as the center of the 
 CORE_RGB = int(CORE_COLOR.lstrip("#"), 16)
 CORE_W, CORE_H = 300, 150
 
-# Karpathy "LLM Wiki" control plane: hubs beside the core, each touching every step.
-# (stem, title, color, one-liner)
-HUBS = [
-    ("_log",     "Log",     "#8a8a96", "the append-only chronological record. every checkpoint logs here."),
-    ("_schema",  "Schema",  "#d0a23c", "conventions and structure. governs how every checkpoint behaves."),
-    ("_sources", "Sources", "#5b8def", "the raw layer index. the immutable sources every step reads from."),
-]
-HUB_R = 220.0      # small radius for the control-plane cluster around the core
-HUB_W, HUB_H = 200, 90
+# The Karpathy "LLM Wiki" control plane (index / log / schema / sources / raw layer) lives
+# as sections INSIDE _core, not as separate nodes. one central core, nothing beside it.
 
 
 def positive_int(value):
@@ -121,16 +114,15 @@ def render_note(i, goal, slug, date, max_loops):
     body = (body.replace("{{goal}}", goal).replace("{{slug}}", slug)
                 .replace("{{date}}", date).replace("{{max_loops}}", str(max_loops)))
 
-    # Karpathy cross-referencing: each checkpoint links its ring neighbours (prev/next) and
-    # the whole control plane, so the wiki is densely interlinked with no orphans.
-    plane = " ".join(f"[[{s}]]" for s, *_ in HUBS)
+    # each checkpoint links its ring neighbours (prev/next) and the core, so the wiki is
+    # densely interlinked with no orphans, everything pointing back into _core.
     front = [
         "---", "goaloop: checkpoint", f"step: {i}", f'title: "{title}"',
         f'cut: "{cut}"', f'prev: "[[{names[prev_i]}]]"', f'next: "[[{names[next_i]}]]"',
         f"goal: {json.dumps(goal)}", f"slug: {slug}", "---", "",
     ]
     nav = (f"---\n↩ [[{CORE_STEM}]]  ·  ◀ [[{names[prev_i]}|{CHECKPOINTS[prev_i][0]}]]"
-           f"  ·  [[{names[next_i]}|{CHECKPOINTS[next_i][0]}]] ▶  ·  plane: {plane}\n")
+           f"  ·  [[{names[next_i]}|{CHECKPOINTS[next_i][0]}]] ▶\n")
     return "\n".join(front) + f"# {title}\n\n" + body.rstrip() + "\n\n" + nav
 
 
@@ -143,18 +135,6 @@ def render_core(goal, slug, date, max_loops):
                 .replace("{{loop_index}}", loop_index))
     front = ["---", "goaloop: core", 'title: "Core"', f"goal: {json.dumps(goal)}", f"slug: {slug}", "---", ""]
     return "\n".join(front) + "# goaloop · core\n\n" + body.rstrip() + "\n"
-
-
-def render_hub(stem, title, desc):
-    """A control-plane hub note: links every checkpoint plus the rest of the control plane."""
-    steps = "\n".join(f"- [[{i:02d} - {CHECKPOINTS[i][0]}]]" for i in range(N))
-    others = "\n".join(f"- [[{s}]]" for s, *_ in HUBS if s != stem)
-    front = ["---", "goaloop: hub", f'title: "{title}"', "---", ""]
-    body = (f"# {title}\n\n{desc}\n\n"
-            f"## Touches every step\n{steps}\n\n"
-            f"## Control plane\n- [[_core]]\n{others}\n\n"
-            f"## Entries\n<!-- newest first; append-only -->\n")
-    return "\n".join(front) + body
 
 
 def extract_runs(text):
@@ -187,6 +167,22 @@ def write_note(path, fresh, force):
     return "rebuilt(+runs)" if preserved else "rebuilt"
 
 
+def write_core(path, fresh):
+    """Rewrite _core from template but PRESERVE its append-only '## Log' tail section."""
+    if path.exists():
+        old = path.read_text(encoding="utf-8")
+        i = old.find("## Log")
+        if i >= 0:
+            kept = [ln for ln in old[i + len("## Log"):].splitlines()
+                    if ln.strip() and not ln.strip().startswith("<!--")]
+            if kept:
+                k = fresh.find("## Log")
+                if k >= 0:
+                    nl = fresh.find("\n", k)
+                    fresh = fresh[:nl + 1] + "\n".join(kept) + "\n" + fresh[nl + 1:]
+    path.write_text(fresh, encoding="utf-8")
+
+
 # --- canvas -----------------------------------------------------------------
 def _side(p_from, p_to):
     dx, dy = p_to[0] - p_from[0], p_to[1] - p_from[1]
@@ -215,23 +211,14 @@ def build_canvas(centers):
                       "toNode": f"n{b}", "toSide": ts, "toEnd": "arrow",
                       "color": "1", "label": label})
 
-    # central control plane: core at (0,0) + the Karpathy hubs clustered around it.
-    # every central node spokes to every checkpoint -> a dense, multi-hub star.
-    centrals = [("core", CORE_STEM, CORE_COLOR, CORE_W, CORE_H, (0.0, 0.0))]
-    for k, (stem, _t, color, _d) in enumerate(HUBS):
-        a = -math.pi / 2 + k * 2 * math.pi / len(HUBS)
-        centrals.append((f"h{k}", stem, color, HUB_W, HUB_H,
-                         (HUB_R * math.cos(a), HUB_R * math.sin(a))))
-    for cid, stem, color, w, h, (cx, cy) in centrals:
-        nodes.append({"id": cid, "type": "file", "file": f"{stem}.md",
-                      "x": round(cx - w / 2), "y": round(cy - h / 2),
-                      "width": w, "height": h, "color": color})
-        for i, (sx, sy) in enumerate(centers):
-            fs, ts = _side((cx, cy), (sx, sy))
-            edges.append({"id": f"{cid}s{i}", "fromNode": cid, "fromSide": fs,
-                          "toNode": f"n{i}", "toSide": ts, "toEnd": "arrow"})
-    for k in range(len(HUBS)):                           # core anchors the control-plane cluster
-        edges.append({"id": f"corh{k}", "fromNode": "core", "toNode": f"h{k}", "toEnd": "arrow"})
+    # single central core at (0,0) + a spoke to every checkpoint
+    nodes.append({"id": "core", "type": "file", "file": f"{CORE_STEM}.md",
+                  "x": round(-CORE_W / 2), "y": round(-CORE_H / 2),
+                  "width": CORE_W, "height": CORE_H, "color": CORE_COLOR})
+    for i, (cx, cy) in enumerate(centers):
+        fs, ts = _side((0, 0), (cx, cy))
+        edges.append({"id": f"s{i}", "fromNode": "core", "fromSide": fs,
+                      "toNode": f"n{i}", "toSide": ts, "toEnd": "arrow"})
     return {"nodes": nodes, "edges": edges}
 
 
@@ -272,9 +259,6 @@ def patch_graph(vault):
     ]
     cfg["colorGroups"].append(
         {"query": f'path:"{CORE_STEM}.md"', "color": {"a": 1, "rgb": CORE_RGB}})
-    for stem, _t, color, _d in HUBS:                  # control-plane hubs get their own colors
-        cfg["colorGroups"].append(
-            {"query": f'path:"{stem}.md"', "color": {"a": 1, "rgb": int(color.lstrip("#"), 16)}})
     gpath.parent.mkdir(parents=True, exist_ok=True)
     gpath.write_text(json.dumps(cfg, indent=2), encoding="utf-8")
 
@@ -316,14 +300,8 @@ def build(goal, vault, force=False, max_loops=3):
         fresh = render_note(i, goal, slug, date, max_loops)
         status[names[i]] = write_note(vault / f"{names[i]}.md", fresh, force)
 
-    # the core is structural (no user data lives in it) so it is always (re)written
-    (vault / f"{CORE_STEM}.md").write_text(render_core(goal, slug, date, max_loops), encoding="utf-8")
-
-    # control-plane hubs (Karpathy: log, schema, sources) — created once, never clobbered
-    for stem, title, _color, desc in HUBS:
-        hp = vault / f"{stem}.md"
-        if not hp.exists():
-            hp.write_text(render_hub(stem, title, desc), encoding="utf-8")
+    # _core absorbs index/schema/sources/notes/log; rebuild preserves its append-only Log tail
+    write_core(vault / f"{CORE_STEM}.md", render_core(goal, slug, date, max_loops))
 
     # visuals + config carry no user data, so they are always (re)written
     centers = ring_centers()
@@ -335,10 +313,8 @@ def build(goal, vault, force=False, max_loops=3):
 
     print(f"vault: {vault}")
     print(f"goal:  {goal}  (slug: {slug})  max_loops: {max_loops}")
-    centrals = 1 + len(HUBS)
-    print(f"core + hubs: {centrals} central  |  canvas nodes: {N + centrals}  |  edges: "
-          f"{centrals * N + len(HUBS) + N + len(FEEDBACK)} "
-          f"(central-spokes {centrals * N} + core-hub {len(HUBS)} + ring {N} + feedback {len(FEEDBACK)})")
+    print(f"core: {CORE_STEM}.md  |  canvas nodes: {N + 1}  |  "
+          f"edges: {2 * N + len(FEEDBACK)} (ring {N} + spokes {N} + feedback {len(FEEDBACK)})")
     print("notes: " + ", ".join(f"{k[:2]}:{v}" for k, v in status.items()))
 
 

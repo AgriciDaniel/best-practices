@@ -3,6 +3,15 @@
 all notable changes to best-practices. format loosely follows keep a changelog;
 versions follow semver.
 
+## [1.0.1] - 2026-06-09
+
+### changed
+- **goaloop is now a single core.** collapsed the four-node control plane (`_core` / `_log` /
+  `_schema` / `_sources`) into one `_core` note that holds the loop index plus `## Schema`,
+  `## Sources`, and `## Log` (append-only, preserved across rebuilds) as sections. the graph is
+  the ten checkpoints interlinked around one core. fewer moving parts, same discipline.
+- `svg/goaloop.svg` and `svg/goaloop-graph.png` redrawn for the single-core layout.
+
 ## [1.0.0] - 2026-06-08
 
 first tagged release. the kernel was already here; this marks it 1.0 and adds the

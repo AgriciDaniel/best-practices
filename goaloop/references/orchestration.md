@@ -4,15 +4,15 @@ Read this before walking a loop. Each checkpoint is a stop where you run one com
 record what happened, and link artifacts. The loop graph never grows: artifacts live in
 `topics/<slug>/` which is filtered out of the graph view.
 
-## The control plane
+## The core
 
-Four central nodes (the Karpathy "LLM Wiki" pattern) hold the loop's state; each links every
-checkpoint. Maintain them as you walk:
+A single central node, `_core`, holds the loop's state (the Karpathy "LLM Wiki" pattern as one
+note). Maintain its sections as you walk:
 
-- **`_core`** — the index. Open first. Reflects goal, acceptance, and the loop list.
-- **`_log`** — append-only record. Closeout (08) prepends one dated line per pass.
-- **`_schema`** — conventions that govern every checkpoint. Update when a convention changes.
-- **`_sources`** — raw-layer index over `topics/<slug>/`. Note new source sets here at Read.
+- **the loop** — the ordered checkpoint list and acceptance snapshot. Open first.
+- **## Schema** — conventions that govern every checkpoint. Update when a convention changes.
+- **## Sources** — raw-layer index over `topics/<slug>/`. Note new source sets here at Read.
+- **## Log** — append-only record. Closeout (08) prepends one dated line per pass.
 
 ## Per-checkpoint actions
 
@@ -47,15 +47,14 @@ gap-fill pass.
 **06 Prune (delete more than you add).** Run `/wiki-lint` for orphans. **Archive-only,
 never delete directly:** write a dry-run manifest at `_archive/prune/<date>/manifest.md`,
 get explicit user approval, then move candidates into `_archive/prune/<date>/`. Never prune
-`00`-`09`, the control plane (`_core`/`_log`/`_schema`/`_sources`), `goaloop/`, `scripts/`,
-`Loop.canvas`, or anything outside `topics/<slug>/`.
+`00`-`09`, `_core`, `goaloop/`, `scripts/`, `Loop.canvas`, or anything outside `topics/<slug>/`.
 
 **07 Hot (working memory).** Overwrite the Live state block with about 500 words: recent
 facts, active threads, recent changes. This is a cache, not a journal. Never append it.
 
 **08 Closeout (five parts).** Write integrated result, verification summary, artifact
 ids/links, notes-current confirmation, and the next slice with rationale. Prepend a
-one-line entry to `_log`. Fewer than five parts means the slice is still open.
+one-line entry to the Log section of `_core`. Fewer than five parts means the slice is still open.
 
 **09 Undo & Loop (undo not optional).** Write the reversal plan for this iteration, then
 apply the stop contract (below). Exit only when every acceptance criterion has PASS evidence

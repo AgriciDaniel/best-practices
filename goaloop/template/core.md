@@ -1,5 +1,5 @@
 > [!abstract] Command center
-> The hub of this loop. Open this first; everything links from here.
+> The single hub of this loop. Open this first; everything lives here or links from here.
 
 **Goal:** {{goal}}
 **Max passes:** {{max_loops}} · live status in [[09 - Undo & Loop]]
@@ -12,14 +12,18 @@
 - Live working memory: [[07 - Hot]]
 - Latest closeout: [[08 - Closeout]]
 
-## Notes index (grows)
-Curated notes live in `notes/`. When you add one, list it here and put `[[_core]]` inside it
-so it appears as a satellite around this core in the graph. Raw research stays in the hidden
-`topics/<slug>/`.
+## Schema (conventions)
+The conventions that govern how every checkpoint behaves. Update when a convention changes.
+-
 
-- (no notes yet)
+## Sources (raw layer)
+Index over the immutable `topics/{{slug}}/` artifacts. Note new source sets here at Read.
+-
 
-## Control plane
-- [[_log]] — chronological record
-- [[_schema]] — conventions
-- [[_sources]] — raw layer
+## Notes
+Curated notes live in `notes/`; put `[[_core]]` inside each so it appears around this core.
+Raw research stays in the hidden `topics/{{slug}}/`.
+-
+
+## Log
+<!-- append-only, newest first; Closeout (08) prepends one dated line here -->

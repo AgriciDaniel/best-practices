@@ -194,7 +194,7 @@ bar before the spawn. ask for summaries, not raw tool spew.
 ## goaloop
 
 <p align="center">
-  <img src="svg/goaloop.svg" alt="goaloop: ten checkpoints orbit a four-node control plane, the loop closes on itself" width="100%"/>
+  <img src="svg/goaloop.svg" alt="goaloop: ten checkpoints orbit a single core, the loop closes on itself" width="100%"/>
 </p>
 
 the kernel is a meditation. goaloop is the kernel made runnable: a fixed
@@ -218,8 +218,8 @@ skill that scaffolds and drives it. enforcement is still superpowers; goaloop
 is operationalization. compose, do not substitute.
 
 <p align="center">
-  <img src="svg/goaloop-graph.png" alt="the live goaloop graph: ten interlinked checkpoints around a four-node control plane, no orphans" width="100%"/>
-  <br/><sub>the live graph: ten checkpoints interlinked around the control plane, no orphans.</sub>
+  <img src="svg/goaloop-graph.png" alt="the live goaloop graph: ten interlinked checkpoints orbiting a single core, no orphans" width="100%"/>
+  <br/><sub>the live graph: ten checkpoints orbiting a single core, no orphans.</sub>
 </p>
 
 → [goaloop/](goaloop/) · [goaloop/README.md](goaloop/README.md)

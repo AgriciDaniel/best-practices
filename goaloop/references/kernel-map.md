@@ -17,10 +17,10 @@ Six cuts, three acts, one kernel, agents and humans same rigor.
 | 8 | Closeout | agent kernel: five-part closeout | synthesis | result, verification, artifact ids, notes current, next slice |
 | 9 | Undo & Loop | an undo plan is not optional | decision | keep or roll back. met means exit, else loop to Goal |
 
-## The control plane (Karpathy "LLM Wiki")
-Four central nodes hold the loop's state, each linking every checkpoint: `_core` (index),
-`_log` (append-only record), `_schema` (conventions), `_sources` (raw-layer index). Closeout
-prepends to `_log`; Read notes new source sets in `_sources`.
+## The core (Karpathy "LLM Wiki")
+A single central node, `_core`, holds the loop's state as sections: the loop index, `## Schema`
+(conventions), `## Sources` (raw-layer index over `topics/`), and `## Log` (append-only record).
+Closeout prepends to the Log; Read notes new source sets in Sources. Everything in one core.
 
 ## The three acts land on 1, 3, 4
 Read first (1), write second (3), verify third (4). The other orbs are the cuts and the

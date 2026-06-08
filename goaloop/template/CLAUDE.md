@@ -4,8 +4,8 @@ A best-practices orchestration loop for one goal. Any Claude session that opens 
 should drive it the same way.
 
 ## Start here every time
-1. Open `_core.md` — the command-center index at the center of the control plane. It links to
-   every checkpoint and to the hubs (`_log`/`_schema`/`_sources`).
+1. Open `_core.md` — the single command-center hub. It links every checkpoint and holds the
+   loop index plus the `## Schema`, `## Sources`, and `## Log` sections.
 2. Read `07 - Hot.md` (the Live state block) for the cheapest current context.
 3. Then `00 - Goal.md` for the goal and acceptance criteria.
 
@@ -20,7 +20,8 @@ that note's `## Runs` section (newest first), and link any artifact you produce.
   checkpoints plus `_core` are fixed. Curated notes go in `notes/`; put `[[_core]]` inside
   each and list it in the core's Notes index, so it appears as a satellite around the core
   in the graph. Raw research stays in `topics/<slug>/` (hidden from the graph).
-- **`07 - Hot.md` Live state is overwrite-only.** `_log` is append-only at the top.
+- **`07 - Hot.md` Live state is overwrite-only.** The `## Log` section of `_core` is
+  append-only at the top.
 - **Verify is a real gate.** Every material claim enters the `04 - Verify` claim ledger with
   a PASS/FAIL/UNKNOWN verdict backed by a quote or command output. Do not pass Verify with
   any FAIL or UNKNOWN material claim. On FAIL go back to Write; UNKNOWN goes to Gaps.
@@ -29,8 +30,8 @@ that note's `## Runs` section (newest first), and link any artifact you produce.
 - **Bounded loop.** Honor `max_passes` in `09 - Undo & Loop.md`; if reached with unmet
   criteria, stop and ask the user. Never loop silently.
 - **Prune is archive-only.** Never delete directly: dry-run manifest, explicit approval,
-  then move into `_archive/prune/<date>/`. Never touch `00`-`09`, the control plane
-  (`_core`/`_log`/`_schema`/`_sources`), `goaloop/`, `scripts/`, or `Loop.canvas`.
+  then move into `_archive/prune/<date>/`. Never touch `00`-`09`, `_core`, `goaloop/`,
+  `scripts/`, or `Loop.canvas`.
 - **An undo plan is not optional.** Record it at `09 - Undo & Loop.md` before deciding to
   loop or exit.
 

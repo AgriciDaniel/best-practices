@@ -39,9 +39,8 @@ def main():
 
     # 2. canvas topology: 10 nodes, 10 ring + 2 feedback edges, ring closes 9->0
     canvas = json.loads((tmp / "Loop.canvas").read_text())
-    check("canvas has 14 nodes (10 + core + 3 hubs)", len(canvas["nodes"]) == 14)
-    check("canvas has 55 edges (40 central spokes + 3 core-hub + 10 ring + 2 feedback)",
-          len(canvas["edges"]) == 55)
+    check("canvas has 11 nodes (10 + core)", len(canvas["nodes"]) == 11)
+    check("canvas has 22 edges (10 ring + 10 spokes + 2 feedback)", len(canvas["edges"]) == 22)
     ring_closes = any(e["fromNode"] == "n9" and e["toNode"] == "n0" for e in canvas["edges"])
     check("ring closes 9 -> 0", ring_closes)
 
@@ -53,8 +52,8 @@ def main():
         1 for g in graph["colorGroups"]
         if len([f for f in files if g["query"].split('path:"')[1].rstrip('"') in f]) != 1
     )
-    check("14 colorGroups (10 + core + 3 hubs), zero collisions",
-          len(graph["colorGroups"]) == 14 and collisions == 0)
+    check("11 colorGroups (10 + core), zero collisions",
+          len(graph["colorGroups"]) == 11 and collisions == 0)
 
     # 4. checkpoints interlink via the ring (Karpathy cross-referencing, no orphans)
     loop = [p.stem for p in notes]
@@ -73,24 +72,22 @@ def main():
     check("core node in canvas", any(n.get("id") == "core" for n in canvas["nodes"]))
     check("core spokes to all 10 steps",
           len([e for e in canvas["edges"] if e["fromNode"] == "core" and e["toNode"].startswith("n")]) == 10)
-    check("core links the 3 control-plane hubs",
-          all(f"[[{s}]]" in core for s in ("_log", "_schema", "_sources")))
+    check("core folds the control plane as sections",
+          all(h in core for h in ("## Schema", "## Sources", "## Log")))
+    check("core does not link separate hubs",
+          not any(f"[[{s}]]" in core for s in ("_log", "_schema", "_sources")))
     check("notes/ folder scaffolded", (tmp / "notes").is_dir())
     check("no stray _index node (core does not link notes/_index)", "notes/_index" not in core)
     excludes = [t[len("-path:"):] for t in graph["search"].split() if t.startswith("-path:")]
     check("core visible (not filtered)", not any(ex in "_core.md" for ex in excludes))
-    for stem in ("_log", "_schema", "_sources"):           # Karpathy control-plane hubs
-        hub = (tmp / f"{stem}.md").read_text()
-        hub_links = [t for t in re.findall(r"\[\[([^\]|]+)", hub) if t in idx]
-        check(f"hub {stem} links all 10 checkpoints", len(hub_links) == 10)
-        check(f"hub {stem} visible (not filtered)", not any(ex in f"{stem}.md" for ex in excludes))
+    check("no separate hub files exist",
+          not any((tmp / f"{s}.md").exists() for s in ("_log", "_schema", "_sources")))
 
     # 4c. Karpathy lint: dense interlink, no orphans, no unresolved links
     check("graph hides orphans + unresolved",
           graph["showOrphans"] is False and graph["hideUnresolved"] is True)
-    check("each checkpoint cross-links the control plane",
-          all(all(f"[[{s}]]" in (tmp / f"{c}.md").read_text() for s in ("_log", "_schema", "_sources"))
-              for c in loop))
+    check("each checkpoint links back to the core",
+          all("[[_core]]" in (tmp / f"{c}.md").read_text() for c in loop))
     vis = [p for p in tmp.rglob("*.md") if not any(e in str(p) for e in excludes)]
     vnames = {p.stem for p in vis}
     unresolved = [(p.stem, t) for p in vis for t in re.findall(r"\[\[([^\]|#]+)", p.read_text())

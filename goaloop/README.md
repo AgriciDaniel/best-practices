@@ -12,17 +12,17 @@ them; they never multiply.
 
 `Goal → Read → Map → Write → Verify → Gaps → Prune → Hot → Closeout → Undo & Loop → (back to Goal)`
 
-- **Graph view** renders a dense, orphan-free star: the ten checkpoints with a cyclic color
-  gradient, interlinked and orbiting the control plane.
-- **Loop.canvas** lays the ten checkpoints on a circle with the control plane at the center,
-  plus two red feedback chords (verify fail to write, gaps to read).
-- **The control plane** is four central nodes (the Karpathy "LLM Wiki" pattern), each linking
-  every checkpoint: `_core` (index), `_log` (chronological record), `_schema` (conventions),
-  `_sources` (raw-layer index).
+- **Graph view** renders a dense, orphan-free web: the ten checkpoints with a cyclic color
+  gradient, interlinked and orbiting a single core.
+- **Loop.canvas** lays the ten checkpoints on a circle with the core at the center, plus two
+  red feedback chords (verify fail to write, gaps to read).
+- **`_core`** is the one central node (the Karpathy "LLM Wiki" pattern as one note): the loop
+  index plus `## Schema` (conventions), `## Sources` (raw-layer index), and `## Log`
+  (append-only record) sections.
 - **topics/<slug>/** holds the real artifacts and is filtered out of the graph, so the
   checkpoints never multiply no matter how much you gather.
-- **07 Hot** is the live working-memory checkpoint (overwrite-only). **`_log`** is the
-  append-only journal.
+- **07 Hot** is the live working-memory checkpoint (overwrite-only). The **`## Log`** section
+  of `_core` is the append-only journal.
 
 ## Usage
 
