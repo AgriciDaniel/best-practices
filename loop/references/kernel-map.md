@@ -6,7 +6,7 @@ Six cuts, three acts, one kernel, agents and humans same rigor.
 
 | # | Checkpoint | Principle | Orchestrates | Feeds |
 |---|------------|-----------|--------------|-------|
-| 0 | Goal | intent. acceptance criteria written before execution | goaloop entry | goal, scope, success bar, constraints, blast radius |
+| 0 | Goal | intent. acceptance criteria written before execution | loop entry | goal, scope, success bar, constraints, blast radius |
 | 1 | Read | act 1 read first. cut 1 read before write | `/autoresearch` or `/research` | run-log, `topics/<slug>/sources` |
 | 2 | Map | cut 3 smallest unit that works. enumerate blast radius | `/wiki-query` | known vs missing, next smallest unit |
 | 3 | Write | act 2 write second. cut 2 name like the next reader is hostile | `/save`, wiki-ingest | run-log, `topics/<slug>/concepts` |

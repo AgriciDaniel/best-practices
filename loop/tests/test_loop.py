@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Regression tests for the goaloop generator. Stdlib only; no framework.
+"""Regression tests for the loop generator. Stdlib only; no framework.
 
-Run:  python3 goaloop/tests/test_goaloop.py
+Run:  python3 loop/tests/test_loop.py
 Exits non-zero on any failure.
 """
 import json
@@ -12,7 +12,7 @@ import subprocess
 import sys
 import tempfile
 
-GEN = pathlib.Path(__file__).resolve().parent.parent / "scripts" / "build_goaloop.py"
+GEN = pathlib.Path(__file__).resolve().parent.parent / "scripts" / "build_loop.py"
 failures = []
 
 
@@ -28,7 +28,7 @@ def run(args, cwd):
 
 
 def main():
-    tmp = pathlib.Path(tempfile.mkdtemp(prefix="goaloop_test_"))
+    tmp = pathlib.Path(tempfile.mkdtemp(prefix="loop_test_"))
 
     # 1. scaffold
     r = run(["Test goal here", "--dir", str(tmp), "--max-loops", "5"], tmp)
@@ -117,7 +117,7 @@ def main():
     check("--max-loops 0 rejected", bad.returncode != 0)
 
     # 9. a goal containing a quote stays valid YAML frontmatter
-    tq = pathlib.Path(tempfile.mkdtemp(prefix="goaloop_q_"))
+    tq = pathlib.Path(tempfile.mkdtemp(prefix="loop_q_"))
     run(['build a "smart" loop', "--dir", str(tq)], tq)
     gline = next(l for l in (tq / "00 - Goal.md").read_text().splitlines() if l.startswith("goal:"))
     check("goal with a quote yields valid frontmatter",

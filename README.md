@@ -8,7 +8,7 @@
   <a href="SKILL.md"><img alt="Claude Code skill" src="https://img.shields.io/badge/claude_code-skill_%2B_slash-FF6B35?style=for-the-badge&logo=anthropic&logoColor=white"></a>
   <a href="agents/openai.yaml"><img alt="Codex skill" src="https://img.shields.io/badge/codex-skill_%2B_AGENTS.md-10A37F?style=for-the-badge&logo=openai&logoColor=white"></a>
   <a href="https://github.com/obra/superpowers"><img alt="composes with superpowers" src="https://img.shields.io/badge/composes_with-superpowers-B084CC?style=for-the-badge&logo=github&logoColor=white"></a>
-  <a href="goaloop/README.md"><img alt="goaloop: the kernel as a loop" src="https://img.shields.io/badge/goaloop-the_kernel,_walked-9b6dd6?style=for-the-badge&logo=obsidian&logoColor=white"></a>
+  <a href="#the-loop"><img alt="the loop: the kernel, runnable" src="https://img.shields.io/badge/loop-the_kernel%2C_runnable-9b6dd6?style=for-the-badge&logo=obsidian&logoColor=white"></a>
   <img alt="six cuts · three acts" src="https://img.shields.io/badge/six_cuts-three_acts-0d1117?style=for-the-badge&labelColor=36BCF7">
 </p>
 
@@ -40,7 +40,7 @@ read first. write second. verify third.
 
 each layer assumes the one below. flatten them and the hierarchy collapses.
 
-the three layers are the meditation. [goaloop](#goaloop) is the meditation made
+the three layers are the meditation. [the loop](#the-loop) is the meditation made
 runnable: the same kernel as a loop you walk on one real goal, intent to undo.
 
 ---
@@ -191,13 +191,13 @@ bar before the spawn. ask for summaries, not raw tool spew.
 
 ---
 
-## goaloop
+## the loop
 
 <p align="center">
-  <img src="svg/goaloop.svg" alt="goaloop: ten checkpoints orbit a single core, the loop closes on itself" width="100%"/>
+  <img src="svg/loop.svg" alt="the best-practices loop: ten checkpoints orbit a single core, the loop closes on itself" width="100%"/>
 </p>
 
-the kernel is a meditation. goaloop is the kernel made runnable: a fixed
+the kernel is a meditation. the loop is the kernel made runnable: a fixed
 ten-checkpoint loop you point at one goal and walk, intent to undo, until the
 goal is met. it does not replace the cuts. it routes you through them.
 
@@ -214,15 +214,15 @@ dispatches explorers, verify dispatches fresh-context skeptics, the core is
 the one chair.
 
 it ships as an obsidian vault you can see and navigate, plus a claude code
-skill that scaffolds and drives it. enforcement is still superpowers; goaloop
+skill that scaffolds and drives it. enforcement is still superpowers; the loop
 is operationalization. compose, do not substitute.
 
 <p align="center">
-  <img src="svg/goaloop-graph.png" alt="the live goaloop graph: ten interlinked checkpoints orbiting a single core, no orphans" width="100%"/>
+  <img src="svg/loop-graph.png" alt="the live best-practices loop graph: ten interlinked checkpoints orbiting a single core, no orphans" width="100%"/>
   <br/><sub>the live graph: ten checkpoints orbiting a single core, no orphans.</sub>
 </p>
 
-→ [goaloop/](goaloop/) · [goaloop/README.md](goaloop/README.md)
+→ run it with `/best-practices "<goal>"` · [loop/](loop/) · [loop/references/orchestration.md](loop/references/orchestration.md)
 
 ---
 
@@ -317,16 +317,20 @@ injects just one section. **ten** sections addressable: `stance`,
 `failure`. unrecognized arguments fall through to the full kernel with a
 single-line note.
 
-### claude code: goaloop (the kernel as a loop)
+### claude code: the loop (run the kernel on a goal)
+
+the loop ships inside this skill. for the kernel text alone, copying `SKILL.md`
+(above) is enough; to *run the loop* the `loop/` scripts must be present, so
+symlink the clone as the skill:
 
 ```bash
-ln -s "$(pwd)/goaloop" ~/.claude/skills/goaloop
+ln -s "$(pwd)" ~/.claude/skills/best-practices
 ```
 
-then `/goaloop "<goal>"` scaffolds and drives a ten-checkpoint loop for that
-goal as an obsidian vault, and routes the reference commands into each
-checkpoint. it is manually invoked, not auto-loaded. see
-[goaloop/README.md](goaloop/README.md).
+then `/best-practices "<goal>"` scaffolds and drives a ten-checkpoint loop for
+that goal as an obsidian vault (a section name still scopes the kernel; bare
+`/best-practices` prints the full kernel). see
+[loop/references/orchestration.md](loop/references/orchestration.md).
 
 ### claude code: project CLAUDE.md (shared with the team)
 

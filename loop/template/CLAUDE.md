@@ -1,4 +1,4 @@
-# This is a goaloop vault
+# This is a loop vault
 
 A best-practices orchestration loop for one goal. Any Claude session that opens this vault
 should drive it the same way.
@@ -30,7 +30,7 @@ that note's `## Runs` section (newest first), and link any artifact you produce.
 - **Bounded loop.** Honor `max_passes` in `09 - Undo & Loop.md`; if reached with unmet
   criteria, stop and ask the user. Never loop silently.
 - **Prune is archive-only.** Never delete directly: dry-run manifest, explicit approval,
-  then move into `_archive/prune/<date>/`. Never touch `00`-`09`, `_core`, `goaloop/`,
+  then move into `_archive/prune/<date>/`. Never touch `00`-`09`, `_core`, `loop/`,
   `scripts/`, or `Loop.canvas`.
 - **An undo plan is not optional.** Record it at `09 - Undo & Loop.md` before deciding to
   loop or exit.

@@ -3,30 +3,20 @@
 all notable changes to best-practices. format loosely follows keep a changelog;
 versions follow semver.
 
-## [1.0.1] - 2026-06-09
+## [1.0.0] - 2026-06-09
 
-### changed
-- **goaloop is now a single core.** collapsed the four-node control plane (`_core` / `_log` /
-  `_schema` / `_sources`) into one `_core` note that holds the loop index plus `## Schema`,
-  `## Sources`, and `## Log` (append-only, preserved across rebuilds) as sections. the graph is
-  the ten checkpoints interlinked around one core. fewer moving parts, same discipline.
-- `svg/goaloop.svg` and `svg/goaloop-graph.png` redrawn for the single-core layout.
-
-## [1.0.0] - 2026-06-08
-
-first tagged release. the kernel was already here; this marks it 1.0 and adds the
-runnable layer on top.
+first tagged release: the six-cut kernel and its runnable loop.
 
 ### added
-- **goaloop** the kernel made runnable. a manually-invoked claude code skill that
-  scaffolds and drives a fixed ten-checkpoint best-practices loop as an obsidian vault,
-  with a karpathy "llm wiki" control plane (`_core` / `_log` / `_schema` / `_sources`).
-  ships with a self-contained generator and 33 regression tests.
-- `svg/goaloop.svg` loop and control-plane schematic in the repo house style.
-- `svg/goaloop-graph.png` the live graph: ten interlinked checkpoints, no orphans.
-- a sixth badge, a goaloop readme section framed as the runnable layer, and a version badge.
+- the **kernel** the stance, the engineering kernel (six cuts, three acts), and the agent
+  kernel, as a claude code skill + slash command + portable `AGENTS.md`.
+- the **loop** the kernel made runnable. `/best-practices "<goal>"` scaffolds and drives a
+  fixed ten-checkpoint loop (intent, read, write, verify, gaps, prune, hot, closeout, undo)
+  as an obsidian vault, around a single `_core` note that holds the index, schema, sources,
+  and an append-only log. verify gates on a claim ledger; a stop contract bounds passes; an
+  undo plan is not optional; rebuilds never delete notes. self-contained generator, 29 tests.
+- visuals `svg/loop.svg` (schematic) and `svg/loop-graph.png` (the live graph).
 
 ### notes
-- goaloop is operationalization, not enforcement. for enforcement, still compose with
+- the loop is operationalization, not enforcement. for enforcement, compose with
   [obra/superpowers](https://github.com/obra/superpowers).
-- the kernel itself (the stance, the engineering kernel, the agent kernel) is unchanged.

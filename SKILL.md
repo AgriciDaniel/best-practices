@@ -1,6 +1,6 @@
 ---
 name: best-practices
-description: Use before a non-trivial multi-file diff, before a multi-slice agent run, or when auditing a major change in Codex, Claude Code, or any agent harness. Loads the six-cut kernel.
+description: The six-cut kernel (read first, write second, verify third) and its runnable loop. Use before a non-trivial multi-file diff or multi-slice agent run, when auditing a major change, or to run the best-practices loop on a goal (a fixed ten-checkpoint pass you point at one objective and walk to done).
 license: MIT
 ---
 
@@ -8,9 +8,30 @@ license: MIT
 
 read first. write second. verify third.
 
-a meditation. six axioms compressed into something you reread before shipping.
-this skill loads the kernel. it does not enforce it. for enforcement, compose
-with `obra/superpowers`.
+a meditation: six axioms compressed into something you reread before shipping.
+the kernel does not enforce itself; for enforcement, compose with
+`obra/superpowers`.
+
+to *apply* the kernel to real work, run the **loop** (below): the kernel made
+runnable. that is the default way to use best-practices on a goal.
+
+## the loop (default)
+
+when the user gives you a goal to pursue end to end (or says "run the loop" or
+"start a goal"), scaffold and drive a ten-checkpoint best-practices loop as an
+Obsidian vault:
+
+1. `python3 "${CLAUDE_SKILL_DIR}/loop/scripts/build_loop.py" "<goal>" --dir "<vault>" --max-loops 3`
+   (default `--dir .`). this writes ten checkpoints (`00 - Goal` .. `09 - Undo &
+   Loop`) around a single `_core` note that holds the index, schema, sources,
+   and an append-only log.
+2. open `_core` first, then walk the checkpoints in order, running the
+   orchestrated command at each and recording evidence. full runbook:
+   `${CLAUDE_SKILL_DIR}/loop/references/orchestration.md`.
+3. honor the stop contract (`max_passes`); verify gates on a claim ledger; an
+   undo plan is not optional. rebuilds never delete notes.
+
+for a quick read of the principles instead of a run, the kernel follows.
 
 ## the stance
 
@@ -71,7 +92,7 @@ parallel agent work. keep the main thread for requirements, decisions, and
 integration. delegate bounded work such as exploration, tests, triage, or a
 disjoint implementation slice. ask for summaries, not raw tool output.
 
-## the loop
+## per-change loop
 
 every diff:
 

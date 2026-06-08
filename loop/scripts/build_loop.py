@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""goaloop — scaffold a best-practices orchestration loop as an Obsidian vault.
+"""loop — scaffold a best-practices orchestration loop as an Obsidian vault.
 
 Usage:
-    python3 scripts/build_goaloop.py "<goal text>" [--dir <path>]
+    python3 scripts/build_loop.py "<goal text>" [--dir <path>]
 
 Emits into <path> (default "."):
   - 10 checkpoint notes (00..09), wired into a closed loop (9 -> 0)
@@ -40,8 +40,8 @@ N = len(CHECKPOINTS)
 CARD_W, CARD_H = 260, 120
 RING_R = 620.0         # circle radius; neighbor chord ~= 0.62*R keeps cards clear
 
-SCRIPT_DIR = pathlib.Path(__file__).resolve().parent          # goaloop/scripts/
-TEMPLATE_DIR = SCRIPT_DIR.parent / "template" / "checkpoints"  # goaloop/template/checkpoints/
+SCRIPT_DIR = pathlib.Path(__file__).resolve().parent          # loop/scripts/
+TEMPLATE_DIR = SCRIPT_DIR.parent / "template" / "checkpoints"  # loop/template/checkpoints/
 
 # feedback chords the kernel implies: (from_idx, to_idx, label)
 FEEDBACK = [(4, 3, "fail → rewrite"), (5, 1, "gaps → re-read")]
@@ -117,7 +117,7 @@ def render_note(i, goal, slug, date, max_loops):
     # each checkpoint links its ring neighbours (prev/next) and the core, so the wiki is
     # densely interlinked with no orphans, everything pointing back into _core.
     front = [
-        "---", "goaloop: checkpoint", f"step: {i}", f'title: "{title}"',
+        "---", "loop: checkpoint", f"step: {i}", f'title: "{title}"',
         f'cut: "{cut}"', f'prev: "[[{names[prev_i]}]]"', f'next: "[[{names[next_i]}]]"',
         f"goal: {json.dumps(goal)}", f"slug: {slug}", "---", "",
     ]
@@ -133,8 +133,8 @@ def render_core(goal, slug, date, max_loops):
     body = (body.replace("{{goal}}", goal).replace("{{slug}}", slug)
                 .replace("{{date}}", date).replace("{{max_loops}}", str(max_loops))
                 .replace("{{loop_index}}", loop_index))
-    front = ["---", "goaloop: core", 'title: "Core"', f"goal: {json.dumps(goal)}", f"slug: {slug}", "---", ""]
-    return "\n".join(front) + "# goaloop · core\n\n" + body.rstrip() + "\n"
+    front = ["---", "loop: core", 'title: "Core"', f"goal: {json.dumps(goal)}", f"slug: {slug}", "---", ""]
+    return "\n".join(front) + "# loop · core\n\n" + body.rstrip() + "\n"
 
 
 def extract_runs(text):
@@ -224,7 +224,7 @@ def build_canvas(centers):
 
 # --- graph config -----------------------------------------------------------
 # Show ONLY the 10 loop notes: exclude artifacts, archive, the product docs, and the log.
-GRAPH_FILTER = ("-path:_archive -path:goaloop -path:examples -path:scripts "
+GRAPH_FILTER = ("-path:_archive -path:loop/ -path:examples -path:scripts "
                 "-path:topics -path:.canvas")
 
 GRAPH_DEFAULTS = {

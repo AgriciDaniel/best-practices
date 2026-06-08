@@ -18,7 +18,7 @@ note). Maintain its sections as you walk:
 
 **00 Goal (intent).** Clarify the goal in plain language. Write the acceptance criteria
 (the bar for "done") and the scope, constraints, and blast radius into `00 - Goal.md`
-before any work. If the vault has no loop, scaffold it first with `build_goaloop.py`.
+before any work. If the vault has no loop, scaffold it first with `build_loop.py`.
 
 **01 Read (read first).** Auto-route: version numbers, named APIs, or recent events use
 `/research --deep`; broad or strategic topics use `/autoresearch`. Gather at least 3
@@ -47,7 +47,7 @@ gap-fill pass.
 **06 Prune (delete more than you add).** Run `/wiki-lint` for orphans. **Archive-only,
 never delete directly:** write a dry-run manifest at `_archive/prune/<date>/manifest.md`,
 get explicit user approval, then move candidates into `_archive/prune/<date>/`. Never prune
-`00`-`09`, `_core`, `goaloop/`, `scripts/`, `Loop.canvas`, or anything outside `topics/<slug>/`.
+`00`-`09`, `_core`, `loop/`, `scripts/`, `Loop.canvas`, or anything outside `topics/<slug>/`.
 
 **07 Hot (working memory).** Overwrite the Live state block with about 500 words: recent
 facts, active threads, recent changes. This is a cache, not a journal. Never append it.
@@ -85,7 +85,7 @@ edge color. The 9 → 0 ring edge is the undo/loop closure itself.
 
 ## Fan-out (agent kernel)
 
-When a checkpoint needs scale, goaloop is the one chair:
+When a checkpoint needs scale, loop is the one chair:
 - **Read** dispatches research explorers (map sources, do not synthesize).
 - **Verify** dispatches adversarial verifiers (each tries to refute a claim; gate on
   majority). The verifier must not be the agent that wrote the material.
