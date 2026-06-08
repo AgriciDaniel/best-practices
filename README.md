@@ -4,6 +4,7 @@
 
 <p align="center">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-36BCF7?style=for-the-badge&logo=opensourceinitiative&logoColor=white"></a>
+  <a href="https://github.com/AgriciDaniel/best-practices/releases"><img alt="Version" src="https://img.shields.io/github/v/release/AgriciDaniel/best-practices?style=for-the-badge&color=FFD700&label=version"></a>
   <a href="SKILL.md"><img alt="Claude Code skill" src="https://img.shields.io/badge/claude_code-skill_%2B_slash-FF6B35?style=for-the-badge&logo=anthropic&logoColor=white"></a>
   <a href="agents/openai.yaml"><img alt="Codex skill" src="https://img.shields.io/badge/codex-skill_%2B_AGENTS.md-10A37F?style=for-the-badge&logo=openai&logoColor=white"></a>
   <a href="https://github.com/obra/superpowers"><img alt="composes with superpowers" src="https://img.shields.io/badge/composes_with-superpowers-B084CC?style=for-the-badge&logo=github&logoColor=white"></a>
